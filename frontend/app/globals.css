@@ -1,0 +1,262 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom animations for landing page */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.8s ease-out forwards;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.8s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.8s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.6s ease-out forwards;
+}
+
+/* Staggered animations for cards */
+.animate-stagger-1 { animation-delay: 0.1s; }
+.animate-stagger-2 { animation-delay: 0.2s; }
+.animate-stagger-3 { animation-delay: 0.3s; }
+.animate-stagger-4 { animation-delay: 0.4s; }
+.animate-stagger-5 { animation-delay: 0.5s; }
+.animate-stagger-6 { animation-delay: 0.6s; }
+.animate-stagger-7 { animation-delay: 0.7s; }
+.animate-stagger-8 { animation-delay: 0.8s; }
+
+/* Hover effects for application cards */
+.group:hover .group-hover\:scale-110 {
+  transform: scale(1.1);
+}
+
+.group:hover .group-hover\:text-finance-secondary-600 {
+  color: rgb(var(--finance-secondary-600));
+}
+
+.group:hover .group-hover\:bg-finance-secondary-50 {
+  background-color: rgb(var(--finance-secondary-50));
+}
+
+.group:hover .group-hover\:border-finance-secondary-300 {
+  border-color: rgb(var(--finance-secondary-300));
+}
+
+@layer components {
+  .finance-card {
+    @apply bg-card rounded-lg border border-border p-4 shadow-sm transition-all hover:shadow-md;
+  }
+  
+  .stat-card {
+    @apply finance-card flex flex-col space-y-2;
+  }
+  
+  .stat-card-title {
+    @apply text-sm font-medium text-muted-foreground;
+  }
+  
+  .stat-card-value {
+    @apply text-2xl font-bold;
+  }
+  
+  .stat-card-change {
+    @apply text-sm font-medium;
+  }
+  
+  .stat-card-change-positive {
+    @apply text-finance-success-500;
+  }
+  
+  .stat-card-change-negative {
+    @apply text-finance-danger-500;
+  }
+  
+  .sidebar-item {
+    @apply flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-colors hover:bg-muted;
+  }
+  
+  .sidebar-item-active {
+    @apply bg-muted text-foreground font-medium;
+  }
+  
+  .grid-item {
+    @apply bg-card text-card-foreground rounded-lg border p-4 shadow-sm;
+  }
+
+  /* Market data table styles */
+  .market-table-container {
+    @apply w-full overflow-x-auto;
+  }
+  
+  .market-table {
+    @apply w-full text-sm;
+  }
+  
+  .market-table-header {
+    @apply bg-muted text-muted-foreground font-medium text-xs uppercase;
+  }
+  
+  .market-table-row {
+    @apply border-b border-border transition-colors hover:bg-muted/30;
+  }
+  
+  .market-table-cell {
+    @apply p-2;
+  }
+  
+  /* Chart styles */
+  .chart-container {
+    @apply h-full w-full min-h-[200px] p-4;
+  }
+
+  /* Animation utilities */
+  .animate-fade-in {
+    @apply opacity-0 animate-in fade-in duration-300;
+  }
+  
+  .animate-slide-up {
+    @apply opacity-0 translate-y-4 animate-in fade-in slide-in-from-bottom-4 duration-300;
+  }
+  
+  .animate-slide-in-right {
+    @apply opacity-0 -translate-x-4 animate-in fade-in slide-in-from-left-4 duration-300;
+  }
+
+  /* Timeline for data periods */
+  .time-selector {
+    @apply flex space-x-1 p-1 bg-muted rounded-md text-xs;
+  }
+  
+  .time-selector-item {
+    @apply px-2 py-1 rounded-sm cursor-pointer;
+  }
+  
+  .time-selector-item-active {
+    @apply bg-primary text-primary-foreground;
+  }
+}

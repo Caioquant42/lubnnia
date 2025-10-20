@@ -1,0 +1,82 @@
+# Fix error in update_options.py:
+Error loading data for PETR4 into DolphinDB: <Exception> in run: Server response: 'insertOptionsData(data) => insertOptionsData: append!(t, select symbol(symbol) as symbol,time,spot_price,symbol(spot_symbol) as spot_symbol,string(type) as type,due_date,strike,premium,symbol(maturity_type) as maturity_type,days_to_maturity,symbol(moneyness) as moneyness,delta,gamma,vega,theta,rho,volatility,poe,bs from data) => The column [type] expects type of STRING, but the actual type is DOUBLE. RefId:S05004' script: '
+    def insertOptionsData(data) {
+        t = loadTable("dfs://oplab", "new_options")
+        t.append!(select
+            symbol(symbol) as symbol,
+            time,
+            spot_price,
+            symbol(spot_symbol) as spot_symbol,
+            string(type) as type,
+            due_date,
+            strike,
+            premium,
+            symbol(maturity_type) as maturity_type,
+            days_to_maturity,
+            symbol(moneyness) as moneyness,
+            delta,
+            gamma,
+            vega,
+            theta,
+            rho,
+            volatility,
+            poe,
+            bs
+            from data)
+        return size(data)
+    }
+    insertOptionsData(data)
+    '
+Options Data for VALE3 retrieved successfully.
+Data has been written to VALE3_options.csv
+dtypes após leitura:
+symbol               object
+time                 object
+spot_price          float64
+spot_symbol          object
+type                 object
+due_date             object
+strike              float64
+premium             float64
+maturity_type        object
+days_to_maturity      int64
+moneyness            object
+delta               float64
+gamma               float64
+vega                float64
+theta               float64
+rho                 float64
+volatility          float64
+poe                 float64
+bs                  float64
+dtype: object
+Unique values in 'type': ['CALL' 'PUT']
+Unique values in 'type' após conversão: ['CALL' 'PUT']
+Error loading data for VALE3 into DolphinDB: <Exception> in run: Server response: 'insertOptionsData(data) => insertOptionsData: append!(t, select symbol(symbol) as symbol,time,spot_price,symbol(spot_symbol) as spot_symbol,string(type) as type,due_date,strike,premium,symbol(maturity_type) as maturity_type,days_to_maturity,symbol(moneyness) as moneyness,delta,gamma,vega,theta,rho,volatility,poe,bs from data) => The column [type] expects type of STRING, but the actual type is DOUBLE. RefId:S05004' script: '
+    def insertOptionsData(data) {
+        t = loadTable("dfs://oplab", "new_options")
+        t.append!(select
+            symbol(symbol) as symbol,
+            time,
+            spot_price,
+            symbol(spot_symbol) as spot_symbol,
+            string(type) as type,
+            due_date,
+            strike,
+            premium,
+            symbol(maturity_type) as maturity_type,
+            days_to_maturity,
+            symbol(moneyness) as moneyness,
+            delta,
+            gamma,
+            vega,
+            theta,
+            rho,
+            volatility,
+            poe,
+            bs
+            from data)
+        return size(data)
+    }
+    insertOptionsData(data)
+    '

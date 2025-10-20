@@ -1,0 +1,172 @@
+{
+  "mlnsupport": [
+    {
+      "ATIVO": "MRFG3",
+      "FREQ": 57
+    },
+    {
+      "ATIVO": "BBSE3",
+      "FREQ": 57
+    },
+    {
+      "ATIVO": "PCAR3",
+      "FREQ": 41
+    },
+    {
+      "ATIVO": "TOTS3",
+      "FREQ": 15
+    },
+    {
+      "ATIVO": "LREN3",
+      "FREQ": 13
+    },
+    {
+      "ATIVO": "IRBR3",
+      "FREQ": 9
+    },
+    {
+      "ATIVO": "CMIN3",
+      "FREQ": 5
+    },
+    {
+      "ATIVO": "RAIL3",
+      "FREQ": 5
+    },
+    {
+      "ATIVO": "YDUQ3",
+      "FREQ": 4
+    },
+    {
+      "ATIVO": "BEEF3",
+      "FREQ": 3
+    },
+    {
+      "ATIVO": "CYRE3",
+      "FREQ": 3
+    },
+    {
+      "ATIVO": "EZTC3",
+      "FREQ": 3
+    },
+    {
+      "ATIVO": "VIVA3",
+      "FREQ": 3
+    },
+    {
+      "ATIVO": "COGN3",
+      "FREQ": 2
+    },
+    {
+      "ATIVO": "SBSP3",
+      "FREQ": 2
+    },
+    {
+      "ATIVO": "PETR3",
+      "FREQ": 2
+    },
+    {
+      "ATIVO": "JBSS3",
+      "FREQ": 1
+    },
+    {
+      "ATIVO": "RENT3",
+      "FREQ": 1
+    },
+    {
+      "ATIVO": "B3SA3",
+      "FREQ": 1
+    },
+    {
+      "ATIVO": "BRFS3",
+      "FREQ": 1
+    }
+  ],
+  "mcport": {
+    "saldo": 802,
+    "PCAR3": 66,
+    "EMBR3": 61,
+    "TOTS3": 61,
+    "ELET3": 61,
+    "BRFS3": 60,
+    "WEGE3": 59,
+    "SBSP3": 58,
+    "BBSE3": 56,
+    "B3SA3": 54,
+    "BEEF3": 53,
+    "CMIG4": 52,
+    "CYRE3": 52,
+    "STBP3": 50,
+    "IRBR3": 49,
+    "MRFG3": 48,
+    "CXSE3": 48,
+    "ITUB4": 47,
+    "CPFE3": 46,
+    "CPLE6": 46,
+    "CMIN3": 46,
+    "BBDC3": 45,
+    "TAEE11": 45,
+    "BBAS3": 44,
+    "EQTL3": 43,
+    "SLCE3": 43,
+    "SANB11": 42,
+    "ABEV3": 42,
+    "EGIE3": 41,
+    "RDOR3": 41,
+    "GGBR4": 41,
+    "BPAC11": 41,
+    "JBSS3": 41,
+    "ITSA4": 40,
+    "ELET6": 40,
+    "CCRO3": 39,
+    "BBDC4": 39,
+    "KLBN11": 39,
+    "PETR4": 38,
+    "EZTC3": 38,
+    "BRAP4": 38,
+    "MULT3": 37,
+    "ENEV3": 37,
+    "ENGI11": 37,
+    "LREN3": 36,
+    "HAPV3": 36,
+    "CVCB3": 36,
+    "SUZB3": 36,
+    "TIMS3": 36,
+    "PETZ3": 36,
+    "COGN3": 35,
+    "PRIO3": 35,
+    "RADL3": 35,
+    "YDUQ3": 34,
+    "SMTO3": 34,
+    "VALE3": 32,
+    "IGTI11": 31,
+    "VIVA3": 30,
+    "CRFB3": 30,
+    "ALOS3": 30,
+    "BRAV3": 29,
+    "RENT3": 29,
+    "CSAN3": 29,
+    "VAMO3": 29,
+    "ALPA4": 29,
+    "MRVE3": 29,
+    "GOAU4": 28,
+    "RECV3": 28,
+    "FLRY3": 28,
+    "LWSA3": 28,
+    "VBBR3": 27,
+    "VIVT3": 27,
+    "ASAI3": 26,
+    "AURE3": 25,
+    "AZZA3": 25,
+    "CSNA3": 24,
+    "PETR3": 23,
+    "NTCO3": 23,
+    "RAIZ4": 23,
+    "BRKM5": 23,
+    "RAIL3": 23,
+    "AZUL4": 23,
+    "MGLU3": 22,
+    "HYPE3": 22,
+    "USIM5": 21,
+    "UGPA3": 19
+  }
+}
