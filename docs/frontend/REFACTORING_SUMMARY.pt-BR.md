@@ -50,10 +50,11 @@ Baseado na revisão de código da Lubnnia (transcrições de áudio em portuguê
 - **Resultado**: Toda documentação do projeto agora no nível raiz
 
 **Consolidado Supabase:**
-- ✅ Movida `frontend/supabase/migrations/` → `supabase/migrations/`
-- ✅ Deletada `frontend/supabase/functions/` duplicada (idêntica à raiz)
+- ✅ Movida `frontend/supabase/migrations/` → `supabase/migrations/` (3 arquivos SQL)
+- ✅ Deletada pasta `frontend/supabase/` COMPLETA (incluindo functions duplicadas)
 - ✅ Atualizado `frontend/tsconfig.json` para remover regra de exclusão do supabase
-- **Resultado**: Fonte única de verdade para configuração Supabase
+- **Resultado**: Fonte única de verdade para configuração Supabase na RAIZ do projeto
+- **Importante para Lubnnia**: As migrations NÃO estão mais dentro do frontend! ✅
 
 ### Fase 2: Caminhos de Importação Atualizados & Referências Verificadas
 
