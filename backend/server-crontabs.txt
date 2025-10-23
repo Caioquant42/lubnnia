@@ -1,0 +1,140 @@
+root@srv653156:~# crontab -l
+# For example, you can run a backup of all your user accounts
+# at 5 a.m every week with:
+# 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/
+#
+# For more information see the manual pages of crontab(5) and cron(8)
+#
+# m h  dom mon dow   command
+
+# ====================================================================
+# ZOMMA QUANT MVP - NEW FLASK/CELERY BACKEND CONFIGURATION
+# Base Path: /var/www/next/next2/project_mvp/backend
+# Virtual Environment: /var/www/next/next2/project_mvp/backend/backenv
+# ====================================================================
+
+## NOTE: These crontabs are now DISABLED as we use Celery Beat for scheduling
+## Celery Beat service automatically handles all scheduled tasks
+## To enable manual cron fallback, uncomment the lines below
+
+## UPDATE IBOV DATA (FLASK/CELERY)
+#*/5 13-21 * * 1-5 /bin/bash -c 'source /var/www/next/next2/project_mvp/backend/backenv/bin/activate && python /var/www/next/next2/project_mvp/backend/app/utils/oplab_ibov_data.py >> /var/www/next/next2/project_mvp/backend/logs/oplab_ibov_data.log 2>&1'
+
+## UPDATE COLLAR ANALYSIS (FLASK/CELERY)
+#*/5 13-21 * * 1-5 /bin/bash -c 'source /var/www/next/next2/project_mvp/backend/backenv/bin/activate && python /var/www/next/next2/project_mvp/backend/app/utils/collar.py >> /var/www/next/next2/project_mvp/backend/logs/collar.log 2>&1'
+
+## UPDATE COVERED CALL ANALYSIS (FLASK/CELERY)
+#*/5 13-21 * * 1-5 /bin/bash -c 'source /var/www/next/next2/project_mvp/backend/backenv/bin/activate && python /var/www/next/next2/project_mvp/backend/app/utils/covered_call.py >> /var/www/next/next2/project_mvp/backend/logs/covered_call.log 2>&1'
+
+## UPDATE VOLATILITY ANALYSIS (FLASK/CELERY)
+#*/5 13-21 * * 1-5 /bin/bash -c 'source /var/www/next/next2/project_mvp/backend/backenv/bin/activate && python /var/www/next/next2/project_mvp/backend/app/utils/volatility_analysis.py >> /var/www/next/next2/project_mvp/backend/logs/volatility_analysis.log 2>&1'
+
+## UPDATE SCREENER YF (FLASK/CELERY)
+#*/5 13-22 * * 1-5 /bin/bash -c 'source /var/www/next/next2/project_mvp/backend/backenv/bin/activate && python /var/www/next/next2/project_mvp/backend/app/utils/screener_yf.py >> /var/www/next/next2/project_mvp/backend/logs/screener_yf.log 2>&1'
+
+## UPDATE BR RECOMMENDATIONS (FLASK/CELERY)
+#0 */4 * * 1-5 /bin/bash -c 'source /var/www/next/next2/project_mvp/backend/backenv/bin/activate && python /var/www/next/next2/project_mvp/backend/app/utils/all_BR_recommendations.py >> /var/www/next/next2/project_mvp/backend/logs/br_recommendations.log 2>&1'
+
+## UPDATE DIVIDEND CALENDAR (FLASK/CELERY)
+#0 0 * * 1-5 /bin/bash -c 'source /var/www/next/next2/project_mvp/backend/backenv/bin/activate && python /var/www/next/next2/project_mvp/backend/app/utils/dividend_calender.py >> /var/www/next/next2/project_mvp/backend/logs/dividend_calendar.log 2>&1'
+
+## UPDATE COINTEGRATION MATRIX (FLASK/CELERY)
+#0 3 * * 1-5 /bin/bash -c 'source /var/www/next/next2/project_mvp/backend/backenv/bin/activate && python /var/www/next/next2/project_mvp/backend/app/utils/cointegration_matrix.py >> /var/www/next/next2/project_mvp/backend/logs/cointegration_matrix.log 2>&1'
+
+## UPDATE RRG DATA (FLASK/CELERY)
+#*/30 13-22 * * 1-5 /bin/bash -c 'source /var/www/next/next2/project_mvp/backend/backenv/bin/activate && python /var/www/next/next2/project_mvp/backend/app/utils/rrg_data.py >> /var/www/next/next2/project_mvp/backend/logs/rrg_data.log 2>&1'
+
+## ====================================================================
+## DOLPHINDB HISTORICAL DATA UPDATES (YFS)
+## ====================================================================
+
+## UPDATE YF HISTORICAL DATA - HIGH FREQUENCY (90m, 60m, 15m, 5m)
+#*/30 13-22 * * 1-5 /bin/bash -c 'source /var/www/next/next2/project_mvp/backend/backenv/bin/activate && python /var/www/next/next2/project_mvp/backend/dolphindb/yfs/historical_90m_60m_15m_5m.py >> /var/www/next/next2/project_mvp/backend/logs/historical_90m_60m_15m_5m.log 2>&1'
+
+## UPDATE YF HISTORICAL DATA - 1 MINUTE (Twice a week)
+#0 23 * * 2,5 /bin/bash -c 'source /var/www/next/next2/project_mvp/backend/backenv/bin/activate && python /var/www/next/next2/project_mvp/backend/dolphindb/yfs/historical_1m.py >> /var/www/next/next2/project_mvp/backend/logs/historical_1m.log 2>&1'
+
+## UPDATE YF HISTORICAL DATA - DAILY AND WEEKLY
+#0 22 * * 1-5 /bin/bash -c 'source /var/www/next/next2/project_mvp/backend/backenv/bin/activate && python /var/www/next/next2/project_mvp/backend/dolphindb/yfs/historical_1w_1d.py >> /var/www/next/next2/project_mvp/backend/logs/historical_1w_1d.log 2>&1'
+
+## ====================================================================
+## LEGACY DJANGO CRONTABS (COMMENTED OUT)
+## These are from the old fullstack Django backend
+## ====================================================================
+
+## ====================================================================
+## LEGACY DJANGO CRONTABS (COMMENTED OUT)
+## These are from the old fullstack Django backend
+## ====================================================================
+
+## OLD UPDATE InvertedCOLLAR (DJANGO ENDPOINTS - DISABLED)
+#*/5 13-22 * * 1-5 /bin/bash -c 'source /var/www/fullstack/webenv/bin/activate && python /var/www/fullstack/backend/apps/endpoint/utils/arbitragem_inverted.py >> /var/www/fullstack/logs/arbitragem_inverted.log 2>&1'
+
+## OLD UPDATE COLLAR (DJANGO ENDPOINTS - DISABLED)
+#*/5 13-22 * * 1-5 /bin/bash -c 'source /var/www/fullstack/webenv/bin/activate && python /var/www/fullstack/backend/apps/endpoint/utils/arbitragem4.py >> /var/www/fullstack/logs/arbitragem4.log 2>&1'
+
+## OLD UPDATE ENDPOINT (DJANGO ENDPOINTS - DISABLED)
+#*/5 13-22 * * 1-5 /bin/bash -c 'source /var/www/fullstack/webenv/bin/activate && python /var/www/fullstack/backend/apps/endpoint/utils/fetch_stock.py >> /var/www/fullstack/logs/fetch_stock.log 2>&1'
+
+## OLD UPDATE SURFACE (DJANGO ENDPOINTS - DISABLED)
+#*/5 13-22 * * 1-5 /bin/bash -c 'source /var/www/fullstack/webenv/bin/activate && python /var/www/fullstack/backend/apps/endpoint/utils/fetch_surface.py >> /var/www/fullstack/logs/fetch_surface.log 2>&1'
+
+## OLD UPDATE Statements (DADOS DE MERCADO - DISABLED)
+#0 2 * * 1-5 /bin/bash -c 'source /var/www/fullstack/webenv/bin/activate && python /var/www/fullstack/backend/apps/fundamental/utils/statements.py >> /var/www/fullstack/logs/statements.log 2>&1'
+
+## OLD UPDATE DY historical (DADOS DE MERCADO - DISABLED)
+#0 4 * * 1-5 /bin/bash -c 'source /var/www/fullstack/webenv/bin/activate && python /var/www/fullstack/backend/apps/fundamental/utils/ddm_historical_dy.py >> /var/www/fullstack/logs/ddm_historical_dy.log 2>&1'
+
+## OLD UPDATE FLUXO (DADOS DE MERCADO - DISABLED)
+#0 7 * * 1-5 /bin/bash -c 'source /var/www/fullstack/webenv/bin/activate && python /var/www/fullstack/backend/apps/endpoint/utils/fluxo_ddm.py >> /var/www/fullstack/logs/fluxo_ddm.log 2>&1'
+
+## OLD UPDATE SURVIVAL - DISABLED)
+#0 22 * * 1-5 /bin/bash -c 'source /var/www/fullstack/webenv/bin/activate && python /var/www/fullstack/backend/apps/survival/utils/survival_lomax.py >> /var/www/fullstack/logs/survival_lomax.log 2>&1'
+
+## OLD UPDATE SCREENER (DJANGO - DISABLED)
+#*/5 13-22 * * 1-5 /bin/bash -c 'source /var/www/fullstack/webenv/bin/activate && python /var/www/fullstack/backend/apps/screener/utils/screener_yf.py >> /var/www/fullstack/logs/screener_yf.log 2>&1'
+
+## OLD UPDATE RECOMMENDATIONS BR (DJANGO - DISABLED)
+#0 22 * * 1-5 /bin/bash -c 'source /var/www/fullstack/webenv/bin/activate && python /var/www/fullstack/backend/apps/recommendation/utils/fetch_br_recommendations.py >> /var/www/fullstack/logs/fetch_br_recommendations.log 2>&1'
+
+## OLD UPDATE RECOMMENDATIONS - NASDAQ (DJANGO - DISABLED)
+#0 22 * * 1,4 /bin/bash -c 'source /var/www/fullstack/webenv/bin/activate && python /var/www/fullstack/backend/apps/recommendation/utils/fetch_nasdaq_recommendations.py >> /var/www/fullstack/logs/fetch_nasdaq_recommendations.log 2>&1'
+
+## OLD UPDATE RECOMMENDATIONS -NYSE (DJANGO - DISABLED)
+#0 22 * * 2,5 /bin/bash -c 'source /var/www/fullstack/webenv/bin/activate && python /var/www/fullstack/backend/apps/recommendation/utils/fetch_nyse_recommendations.py >> /var/www/fullstack/logs/fetch_nyse_recommendations.log 2>&1'
+
+## OLD UPDATE UPDATE TOP100 OPTIONS (Oplab-Dolphindb - DISABLED)
+#0 22 * * 1-5 /bin/bash -c 'source /var/www/fullstack/webenv/bin/activate && /var/www/fullstack/backend/dolphindb/oplab/update_options.py' >> /var/www/fullstack/logs/update_options_top100.log 2>&1
+
+## OLD UPDATE STOCKS DAILY (OPLAB-Dolphindb - DISABLED)
+#0 0 * * 1-5 /bin/bash -c 'source /var/www/fullstack/webenv/bin/activate && /var/www/fullstack/backend/dolphindb/oplab/stock_update_day.py' >> /var/www/fullstack/logs/stock_update_day.log 2>&1
+
+## OLD UPDATE STOCKS HOURLY (OPLAB-Dolphindb - DISABLED)
+#0 * * * 1-5 /bin/bash -c 'source /var/www/fullstack/webenv/bin/activate && /var/www/fullstack/backend/dolphindb/oplab/stock_update_hour.py' >> /var/www/fullstack/logs/stock_update_hour.log 2>&1
+
+## OLD UPDATE HISTORICAL DATA 1m EVERY HOUR (YFS-Dolphindb - DISABLED)
+#0 */4 * * 1-5 /bin/bash -c 'source /var/www/fullstack/webenv/bin/activate && /var/www/fullstack/backend/dolphindb/yfs/historical_1m.py' >> /var/www/fullstack/logs/historical_1m.log 2>&1
+
+## OLD UPDATE HISTORICAL DATA HOURLY (YFS-Dolphindb - DISABLED)
+#0 */4 * * 1-5 /bin/bash -c 'source /var/www/fullstack/webenv/bin/activate && /var/www/fullstack/backend/dolphindb/yfs/historical_90m_60m_15m_5m.py' >> /var/www/fullstack/logs/historical_90m_60m_15m_5m.log 2>&1
+
+## OLD UPDATE HISTORICAL DATA DAILY (YFS-Dolphindb - DISABLED)
+#0 0 * * 1-5 /bin/bash -c 'source /var/www/fullstack/webenv/bin/activate && /var/www/fullstack/backend/dolphindb/yfs/historical_1w_1d.py' >> /var/www/fullstack/logs/historical_1w_1d.log 2>&1
+
+## OLD UPDATE CURRENCY HISTORICAL DATA DAILY (YFS-Dolphindb - DISABLED)
+#0 0 * * 1-5 /bin/bash -c 'source /var/www/fullstack/webenv/bin/activate && /var/www/fullstack/backend/dolphindb/yfs/currency/currency_historical_1d.py' >> /var/www/fullstack/logs/currency_historical_1d.log 2>&1
+
+## OLD UPDATE CURRENCY HISTORICAL DATA EVERY 90m, 60m, 15m, AND 5m DAILY (YFS-Dolphindb - DISABLED)
+#0 0 * * 1-5 /bin/bash -c 'source /var/www/fullstack/webenv/bin/activate && /var/www/fullstack/backend/dolphindb/yfs/currency/currency_historical_90m_60_15m_5m.py' >> /var/www/fullstack/logs/currency_historical_1d.log 2>&1
+
+# Dolphin Service (DISABLED - Consider using systemd service instead)
+#* * * * * /var/www/dolphindb/server/check_and_start.sh
+
+## ====================================================================
+## CURRENT ACTIVE SERVICES (Recommended to use systemd services instead of cron)
+## ====================================================================
+## Celery Worker: sudo systemctl status celery_worker.service
+## Celery Beat: sudo systemctl status celery_beat.service  
+## Celery Flower: sudo systemctl status celery_flower.service
+## Flask App: sudo systemctl status your-flask-app.service (if configured)
+## ====================================================================
