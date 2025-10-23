@@ -18,6 +18,8 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/useAuth';
 
+import noBackground from '../../public/logoFiles/web/png/colorLogoWithoutBackground.png';
+
 export default function LandingPage() {
   const { isAuthenticated } = useAuth();
   const router = useRouter();
@@ -38,7 +40,7 @@ export default function LandingPage() {
             <div className='flex items-center gap-3'>
               <button onClick={handleLogoClick}>
                 <Image
-                  src='/Logofiles/For Web/png/Color logo - no background.png'
+                  src={noBackground}
                   alt='Zomma Quant Logo'
                   width={150}
                   height={150}

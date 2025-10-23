@@ -3,25 +3,22 @@
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { useEffect, useState } from 'react';
+
 import {
   fetchRSIData,
   RSIDataItem,
   RSIScreenerResponse,
-} from '@/__api__/screenerApi';
+} from '__api__/screenerApi';
+
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/src/components/ui/card';
-import { SimpleProgress } from '@/src/components/ui/simple-progress';
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@/src/components/ui/tabs';
+} from '@/components/ui/card';
+import { SimpleProgress } from '@/components/ui/simple-progress';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function RSIScreenerPage() {
   const [rsiData, setRsiData] = useState<RSIScreenerResponse | null>(null);

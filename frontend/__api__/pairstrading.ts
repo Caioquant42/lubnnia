@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { apiBaseUrl, defaultHeaders, requestTimeout } from './config';
+import { apiBaseUrl } from './config';
 
 // Types
 export interface PairSignal {
@@ -118,10 +117,12 @@ const defaultOptions = {
 /**
  * Get pairs trading data from the API
  */
-export async function getPairsTrading(params: PairsTradingParams): Promise<PairsResponse> {
+export async function getPairsTrading(
+  params: PairsTradingParams
+): Promise<PairsResponse> {
   // Build query string from params
   const queryParams = new URLSearchParams();
-  
+
   // Add each parameter to the query string if defined
   Object.entries(params).forEach(([key, value]) => {
     if (value !== undefined) {
@@ -133,51 +134,67 @@ export async function getPairsTrading(params: PairsTradingParams): Promise<Pairs
       }
     }
   });
-  
-  const response = await fetch(`${apiBaseUrl}/api/pairs-trading?${queryParams.toString()}`, {
-    ...defaultOptions,
-    method: 'GET',
-  });
-  
+
+  const response = await fetch(
+    `${apiBaseUrl}/api/pairs-trading?${queryParams.toString()}`,
+    {
+      ...defaultOptions,
+      method: 'GET',
+    }
+  );
+
   if (!response.ok) {
-    throw new Error(`Failed to fetch pairs trading data: ${response.statusText}`);
+    throw new Error(
+      `Failed to fetch pairs trading data: ${response.statusText}`
+    );
   }
-  
+
   return response.json();
 }
 
 /**
  * Get recent trading signals
  */
-export async function getRecentSignals(params: Omit<PairsTradingParams, 'data_type' | 'period'>): Promise<PairsResponse> {
+export async function getRecentSignals(
+  params: Omit<PairsTradingParams, 'data_type' | 'period'>
+): Promise<PairsResponse> {
   return getPairsTrading({
     data_type: 'signals',
-    ...params
+    ...params,
   });
 }
 
 /**
  * Get cointegration data for pairs
  */
-export async function getCointegrationData(params: Omit<PairsTradingParams, 'data_type' | 'signal_type' | 'min_zscore' | 'max_zscore'>): Promise<PairsResponse> {
+export async function getCointegrationData(
+  params: Omit<
+    PairsTradingParams,
+    'data_type' | 'signal_type' | 'min_zscore' | 'max_zscore'
+  >
+): Promise<PairsResponse> {
   return getPairsTrading({
     data_type: 'cointegration',
     cointegrated_only: true, // Default to cointegrated pairs only
-    ...params
+    ...params,
   });
 }
 
 /**
  * Get detailed analysis for a specific pair
  */
-export async function getPairDetails(asset1: string, asset2: string, period: string = 'last_6_months'): Promise<PairDetailResponse> {
+export async function getPairDetails(
+  asset1: string,
+  asset2: string,
+  period: string = 'last_6_months'
+): Promise<PairDetailResponse> {
   const response = await getPairsTrading({
     data_type: 'pair_details',
     asset1,
     asset2,
-    period: period as 'last_6_months' | 'last_12_months'
+    period: period as 'last_6_months' | 'last_12_months',
   });
-  
+
   return response as unknown as PairDetailResponse;
 }
 
@@ -186,23 +203,23 @@ export async function getPairDetails(asset1: string, asset2: string, period: str
  */
 export function extractUniqueSymbols(data: PairsResponse): string[] {
   const symbols = new Set<string>();
-  
+
   // Extract from cointegration results
   if (data.cointegration?.results) {
-    data.cointegration.results.forEach(pair => {
+    data.cointegration.results.forEach((pair) => {
       if (pair.asset1) symbols.add(pair.asset1);
       if (pair.asset2) symbols.add(pair.asset2);
     });
   }
-  
+
   // Extract from signals
   if (data.signals?.signals) {
-    data.signals.signals.forEach(signal => {
+    data.signals.signals.forEach((signal) => {
       if (signal.asset1) symbols.add(signal.asset1);
       if (signal.asset2) symbols.add(signal.asset2);
     });
   }
-  
+
   // Return sorted array of unique symbols
   return Array.from(symbols).sort();
 }

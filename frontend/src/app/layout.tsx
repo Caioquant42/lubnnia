@@ -7,6 +7,10 @@ import { ThemeProvider } from '@/components/ThemeProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
+import faviconBrowser from '../../public/logoFiles/web/favicons/browser.png';
+import faviconAndroid from '../../public/logoFiles/web/favicons/android.png';
+import faviconIphone from '../../public/logoFiles/web/favicons/iphone.png';
+
 export const metadata: Metadata = {
   title: 'Zomma Quant - Professional Trading Platform',
   description:
@@ -14,24 +18,24 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: '/Logofiles/For Web/Favicons/browser.png',
+        url: faviconBrowser.src,
         sizes: '32x32',
         type: 'image/png',
       },
       {
-        url: '/Logofiles/For Web/Favicons/Android.png',
+        url: faviconAndroid.src,
         sizes: '192x192',
         type: 'image/png',
       },
     ],
     apple: [
       {
-        url: '/Logofiles/For Web/Favicons/iPhone.png',
+        url: faviconIphone.src,
         sizes: '180x180',
         type: 'image/png',
       },
     ],
-    shortcut: '/Logofiles/For Web/Favicons/browser.png',
+    shortcut: faviconBrowser.src,
   },
 };
 

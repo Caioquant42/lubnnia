@@ -1,69 +1,56 @@
 'use client';
 
-import {
-  AlertCircle,
-  ChevronDown,
-  Filter,
-  RefreshCcw,
-  SlidersHorizontal,
-} from 'lucide-react';
+import { AlertCircle, RefreshCcw, SlidersHorizontal } from 'lucide-react';
 import { useEffect, useState } from 'react';
+
 // Import API functions
 import {
-  CointegrationPair,
   extractUniqueSymbols,
   getCointegrationData,
   getPairDetails,
   getRecentSignals,
-  PairSignal,
   PairsResponse,
   PairsTradingParams,
-} from '@/__api__/pairstrading';
-import CointegrationTable from '@/src/components/pairstrading/CointegrationTable';
-import PairDetails from '@/src/components/pairstrading/PairDetails';
+} from '__api__/pairstrading';
+
 // Import components
-import RecentSignalsTable from '@/src/components/pairstrading/RecentSignalsTable';
-import StatsCard from '@/src/components/pairstrading/StatsCard';
+import CointegrationTable from '@/components/pairstrading/CointegrationTable';
+import PairDetails from '@/components/pairstrading/PairDetails';
+import RecentSignalsTable from '@/components/pairstrading/RecentSignalsTable';
+import StatsCard from '@/components/pairstrading/StatsCard';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '@/src/components/ui/accordion';
-import { Alert, AlertDescription } from '@/src/components/ui/alert';
-import { Badge } from '@/src/components/ui/badge';
-import { Button } from '@/src/components/ui/button';
+} from '@/components/ui/accordion';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
-} from '@/src/components/ui/card';
-import { Checkbox } from '@/src/components/ui/checkbox';
-import { Input } from '@/src/components/ui/input';
-import { Label } from '@/src/components/ui/label';
+} from '@/components/ui/card';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from '@/src/components/ui/popover';
+} from '@/components/ui/popover';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/src/components/ui/select';
-import { Skeleton } from '@/src/components/ui/skeleton';
-import { Slider } from '@/src/components/ui/slider';
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@/src/components/ui/tabs';
+} from '@/components/ui/select';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 export default function PairsTradingDashboard() {
   // State for current tab

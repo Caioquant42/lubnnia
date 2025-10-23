@@ -1,34 +1,30 @@
 'use client';
 
 import { AlertCircle, ArrowRight, Search } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+
 import {
   fetchStocksVolatilityData,
   getMarketSentiment,
   StockVolatilityData,
-} from '@/__api__/volatilityApi';
-import { Alert, AlertDescription, AlertTitle } from '@/src/components/ui/alert';
-import { Button } from '@/src/components/ui/button';
+} from '__api__/volatilityApi';
+
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/src/components/ui/card';
-import { Input } from '@/src/components/ui/input';
-import { Separator } from '@/src/components/ui/separator';
-import { Skeleton } from '@/src/components/ui/skeleton';
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from '@/src/components/ui/tabs';
-import StockVolatilityDetail from '@/src/components/volatility/StockVolatilityDetail';
-import VolatilityDataTable from '@/src/components/volatility/VolatilityDataTable';
-import VolatilityDistributionChart from '@/src/components/volatility/VolatilityDistributionChart';
-import VolatilityStatusCard from '@/src/components/volatility/VolatilityStatusCard';
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { StockVolatilityDetail } from '@/components/Volatility/StockVolatilityDetail';
+import { VolatilityDataTable } from '@/components/Volatility/VolatilityDataTable';
+import { VolatilityDistributionChart } from '@/components/Volatility/VolatilityDistributionChart';
+import { VolatilityStatusCard } from '@/components/Volatility/VolatilityStatusCard';
 
 export default function VolatilityPage() {
   const [loading, setLoading] = useState(true);

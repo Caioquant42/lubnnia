@@ -1,8 +1,8 @@
-import PairsTradingDashboard from "./PairsTradingDashboard";
+import PairsTradingDashboard from './pairsTradingDashboard';
 
 export const metadata = {
-  title: "Pairs Trading | Zomma Quant",
-  description: "Arbitragem estatística usando pares cointegrados",
+  title: 'Pairs Trading | Zomma Quant',
+  description: 'Arbitragem estatística usando pares cointegrados',
 };
 
 export default function PairsTradingPage() {

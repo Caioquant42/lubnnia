@@ -5,7 +5,8 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
 
 import { createCheckoutSession } from '@/lib/stripe';
-import { STRIPE_PRODUCTS } from '@/stripe-config';
+
+import { STRIPE_PRODUCTS } from '@/utils/stripe-config';
 
 export default function CheckoutPage() {
   const router = useRouter();

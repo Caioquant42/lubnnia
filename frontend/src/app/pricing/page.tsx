@@ -11,7 +11,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 
-import { STRIPE_PRODUCTS } from '../../../stripe-config';
+import { STRIPE_PRODUCTS } from '@/utils/stripe-config';
 
 export default function PricingPage() {
   return (

@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import { PairsResponse } from '__api__/pairstrading';
 
-import { formatNumber } from '@/lib/utils';
+import { formatNumber } from '@/utils/formatNumber';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';

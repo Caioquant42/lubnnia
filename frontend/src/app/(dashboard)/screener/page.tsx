@@ -8,15 +8,15 @@ import {
   ScanSearch,
 } from 'lucide-react';
 import Link from 'next/link';
-import { Button } from '@/src/components/ui/button';
+
+import { Button } from '@/components/ui/button';
 import {
   Card,
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/src/components/ui/card';
+} from '@/components/ui/card';
 
 export default function ScreenerPage() {
   const screenerTools = [
