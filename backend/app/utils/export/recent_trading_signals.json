@@ -1,0 +1,510 @@
+{
+    "last_5_days_signals": [
+        {
+            "asset1": "AZUL4",
+            "asset2": "TAEE11",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.06528793792775356,
+            "half_life": 4.720235221714065,
+            "p_value": 0.019974074839471095,
+            "current_zscore": -2.2118420161708223
+        },
+        {
+            "asset1": "AZUL4",
+            "asset2": "VBBR3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": -0.05697607014828188,
+            "half_life": 1.4598225139534582,
+            "p_value": 0.020635548107747217,
+            "current_zscore": -2.236249856120998
+        },
+        {
+            "asset1": "BBSE3",
+            "asset2": "EZTC3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": -0.003641008827249159,
+            "half_life": 0.8052082043255252,
+            "p_value": 0.04590044573734776,
+            "current_zscore": -2.036120640579972
+        },
+        {
+            "asset1": "BRFS3",
+            "asset2": "BPAC11",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": -0.3947775728688061,
+            "half_life": 3.6709225140290442,
+            "p_value": 0.04776292254608456,
+            "current_zscore": -2.4346267253770595
+        },
+        {
+            "asset1": "BRFS3",
+            "asset2": "CCRO3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": -1.0955677048947852,
+            "half_life": 1.4791186639697989,
+            "p_value": 0.03372256205913144,
+            "current_zscore": -2.06610274240706
+        },
+        {
+            "asset1": "COGN3",
+            "asset2": "STBP3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-30",
+            "beta": -2.0327363201866966,
+            "half_life": 3.0766295032649853,
+            "p_value": 0.00041360486188806605,
+            "current_zscore": 2.335534074912717
+        },
+        {
+            "asset1": "CVCB3",
+            "asset2": "GGBR4",
+            "signal_type": "sell",
+            "signal_date": "2025-05-30",
+            "beta": 0.1733075557862882,
+            "half_life": 6.502564645147247,
+            "p_value": 0.016595146106307707,
+            "current_zscore": 2.2945080230146564
+        },
+        {
+            "asset1": "CVCB3",
+            "asset2": "GOAU4",
+            "signal_type": "sell",
+            "signal_date": "2025-05-30",
+            "beta": 0.277810393457663,
+            "half_life": 2.0596448702892327,
+            "p_value": 0.013025805706076048,
+            "current_zscore": 2.2174881950989462
+        },
+        {
+            "asset1": "GGBR4",
+            "asset2": "NTCO3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.9320848086315383,
+            "half_life": 0.6492089812336203,
+            "p_value": 0.03368633561631235,
+            "current_zscore": -2.3299668625967045
+        },
+        {
+            "asset1": "GGBR4",
+            "asset2": "HYPE3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.20994222487431724,
+            "half_life": 1.1614104330201591,
+            "p_value": 0.0392159916206031,
+            "current_zscore": -2.6257028750586353
+        },
+        {
+            "asset1": "GGBR4",
+            "asset2": "IGTI11",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.08797502052170714,
+            "half_life": 1.438922443436418,
+            "p_value": 0.013896971541686235,
+            "current_zscore": -2.01168515593388
+        },
+        {
+            "asset1": "GGBR4",
+            "asset2": "JBSS3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": -0.13645165427731332,
+            "half_life": 0.830786438839447,
+            "p_value": 0.004346110946576001,
+            "current_zscore": -2.0966180786029267
+        },
+        {
+            "asset1": "GGBR4",
+            "asset2": "RENT3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.09290660102497306,
+            "half_life": 1.893457580280479,
+            "p_value": 0.007692987285832731,
+            "current_zscore": -2.5076927228168486
+        },
+        {
+            "asset1": "GGBR4",
+            "asset2": "MULT3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.19991870744401474,
+            "half_life": 1.845758017994166,
+            "p_value": 0.006482407269023476,
+            "current_zscore": -2.3992181378585165
+        },
+        {
+            "asset1": "GGBR4",
+            "asset2": "RECV3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.3289569592527819,
+            "half_life": 1.157357776503966,
+            "p_value": 0.004633762719667382,
+            "current_zscore": -2.1298180876400283
+        },
+        {
+            "asset1": "GGBR4",
+            "asset2": "SLCE3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.5316933608152574,
+            "half_life": 0.9461682788668112,
+            "p_value": 0.00021700358966893606,
+            "current_zscore": -2.2669643042673098
+        },
+        {
+            "asset1": "GGBR4",
+            "asset2": "TOTS3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.21054800659459172,
+            "half_life": 1.0623880194936979,
+            "p_value": 0.04143998174649958,
+            "current_zscore": -2.0173011744811644
+        },
+        {
+            "asset1": "GGBR4",
+            "asset2": "VBBR3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.20317923242343028,
+            "half_life": 1.978729810550943,
+            "p_value": 0.017297251749589144,
+            "current_zscore": -2.469466225714077
+        },
+        {
+            "asset1": "GGBR4",
+            "asset2": "VIVA3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.08135974444347838,
+            "half_life": 1.2574879902206608,
+            "p_value": 0.028914619920719278,
+            "current_zscore": -2.2300902728834124
+        },
+        {
+            "asset1": "GGBR4",
+            "asset2": "YDUQ3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.1407775562669391,
+            "half_life": 1.1625848634594467,
+            "p_value": 0.0026690840915537094,
+            "current_zscore": -2.115252249920508
+        },
+        {
+            "asset1": "GOAU4",
+            "asset2": "NTCO3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.4990351253430978,
+            "half_life": 0.4077698804515972,
+            "p_value": 0.03879192218371974,
+            "current_zscore": -2.341614588071291
+        },
+        {
+            "asset1": "GOAU4",
+            "asset2": "HYPE3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.11909072103674623,
+            "half_life": 0.5155690611483105,
+            "p_value": 0.029591710371900757,
+            "current_zscore": -2.7317206862165304
+        },
+        {
+            "asset1": "GOAU4",
+            "asset2": "IGTI11",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.06977594015278576,
+            "half_life": 0.9289827422342432,
+            "p_value": 0.009847710025288463,
+            "current_zscore": -2.240714152060555
+        },
+        {
+            "asset1": "GOAU4",
+            "asset2": "JBSS3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": -0.07196106972008254,
+            "half_life": 0.5916650255753318,
+            "p_value": 0.006435234526016626,
+            "current_zscore": -2.174266777255943
+        },
+        {
+            "asset1": "GOAU4",
+            "asset2": "RENT3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.05458229871523468,
+            "half_life": 0.714007787804573,
+            "p_value": 0.01091214755338231,
+            "current_zscore": -2.6587132005749474
+        },
+        {
+            "asset1": "GOAU4",
+            "asset2": "LREN3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.05473031010243545,
+            "half_life": 0.8312229384741786,
+            "p_value": 0.036434846477733845,
+            "current_zscore": -2.02154714556719
+        },
+        {
+            "asset1": "GOAU4",
+            "asset2": "MULT3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.12229818269789305,
+            "half_life": 0.8866652792337109,
+            "p_value": 0.005492637780208699,
+            "current_zscore": -2.585529952773664
+        },
+        {
+            "asset1": "GOAU4",
+            "asset2": "RECV3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.16098885176559996,
+            "half_life": 0.7046958371667942,
+            "p_value": 0.0075992100065691215,
+            "current_zscore": -2.177297661201743
+        },
+        {
+            "asset1": "GOAU4",
+            "asset2": "SLCE3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.32308574813866286,
+            "half_life": 0.5769562452069487,
+            "p_value": 0.0010710795270929409,
+            "current_zscore": -2.514611925096981
+        },
+        {
+            "asset1": "GOAU4",
+            "asset2": "TOTS3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.11034065492341982,
+            "half_life": 0.6996983865934655,
+            "p_value": 0.024704443232749274,
+            "current_zscore": -2.0798846981371213
+        },
+        {
+            "asset1": "GOAU4",
+            "asset2": "VBBR3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.12237697732003028,
+            "half_life": 0.8438893151219985,
+            "p_value": 0.015234917795790177,
+            "current_zscore": -2.6547259670209953
+        },
+        {
+            "asset1": "GOAU4",
+            "asset2": "VIVA3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.043268832075229025,
+            "half_life": 0.783673151197271,
+            "p_value": 0.025057447925440034,
+            "current_zscore": -2.309128418074891
+        },
+        {
+            "asset1": "GOAU4",
+            "asset2": "YDUQ3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.0636942005242025,
+            "half_life": 0.7736913968167637,
+            "p_value": 0.0019822830956609415,
+            "current_zscore": -2.153851175893659
+        },
+        {
+            "asset1": "KLBN11",
+            "asset2": "MGLU3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.3519644851531165,
+            "half_life": 1.347706184006844,
+            "p_value": 0.014004012533435691,
+            "current_zscore": -2.8570859916126703
+        },
+        {
+            "asset1": "KLBN11",
+            "asset2": "SMTO3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": -0.6680672965290597,
+            "half_life": 0.5867511628472264,
+            "p_value": 0.032435682677410406,
+            "current_zscore": -2.7621085589207754
+        },
+        {
+            "asset1": "KLBN11",
+            "asset2": "SLCE3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": -0.01357286965017579,
+            "half_life": null,
+            "p_value": 0.016882390802488448,
+            "current_zscore": -2.8850874937569957
+        },
+        {
+            "asset1": "KLBN11",
+            "asset2": "TAEE11",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.3520490756670309,
+            "half_life": 2.13571355129264,
+            "p_value": 0.028194435400725724,
+            "current_zscore": -2.7743829314885895
+        },
+        {
+            "asset1": "CSNA3",
+            "asset2": "TIMS3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.5494918812542187,
+            "half_life": 123.15890064511191,
+            "p_value": 0.013787596466352893,
+            "current_zscore": -2.400901964067745
+        },
+        {
+            "asset1": "CSNA3",
+            "asset2": "TOTS3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": -0.08876847171686642,
+            "half_life": null,
+            "p_value": 0.028176095529765865,
+            "current_zscore": -2.5121200276389013
+        },
+        {
+            "asset1": "CSNA3",
+            "asset2": "UGPA3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.4206360619926488,
+            "half_life": 2.2743461244227463,
+            "p_value": 0.0034411511815280863,
+            "current_zscore": -2.1008146334653612
+        },
+        {
+            "asset1": "CSNA3",
+            "asset2": "YDUQ3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": -0.218857012537371,
+            "half_life": 2.365606582957942,
+            "p_value": 0.02536601048844481,
+            "current_zscore": -2.0409830268370714
+        },
+        {
+            "asset1": "SUZB3",
+            "asset2": "TAEE11",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": -0.4041072750697978,
+            "half_life": null,
+            "p_value": 0.028823029546513033,
+            "current_zscore": -2.121528830332458
+        },
+        {
+            "asset1": "AURE3",
+            "asset2": "RAIL3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-30",
+            "beta": 0.4160762514788603,
+            "half_life": 0.4013192473872541,
+            "p_value": 0.024568304313726048,
+            "current_zscore": 2.020551646048156
+        },
+        {
+            "asset1": "AZUL4",
+            "asset2": "RECV3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": -0.11429572055159665,
+            "half_life": 1.1784360474720543,
+            "p_value": 0.013543394311276968,
+            "current_zscore": -2.3667967725480694
+        },
+        {
+            "asset1": "BBSE3",
+            "asset2": "NTCO3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.1854210693083953,
+            "half_life": 0.7681001343619455,
+            "p_value": 0.005135749578267369,
+            "current_zscore": -2.0262408212606715
+        },
+        {
+            "asset1": "BBSE3",
+            "asset2": "SMTO3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 0.06116398366178544,
+            "half_life": 0.8667613560745059,
+            "p_value": 0.029331931371936803,
+            "current_zscore": -2.10582729763778
+        },
+        {
+            "asset1": "KLBN11",
+            "asset2": "YDUQ3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": -0.3404805454834001,
+            "half_life": 2.47715269706987,
+            "p_value": 0.02673018514209651,
+            "current_zscore": -2.5462506832707548
+        },
+        {
+            "asset1": "PETR3",
+            "asset2": "TIMS3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 1.4293850533787067,
+            "half_life": 2.8435677032675124,
+            "p_value": 0.02225938909618885,
+            "current_zscore": -2.1657213575751237
+        },
+        {
+            "asset1": "PETR4",
+            "asset2": "TIMS3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": 1.4228820725538196,
+            "half_life": 3.0948668281624983,
+            "p_value": 0.03360944046465508,
+            "current_zscore": -2.0097051012962113
+        },
+        {
+            "asset1": "WEGE3",
+            "asset2": "YDUQ3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-30",
+            "beta": -0.006444380488137114,
+            "half_life": 1.3608495522156256,
+            "p_value": 0.012368417896982923,
+            "current_zscore": -2.3253540854424575
+        }
+    ],
+    "summary": {
+        "total_signals": 50,
+        "buy_signals": 46,
+        "sell_signals": 4,
+        "generated_at": "2025-06-15 17:31:28"
+    }
+}
