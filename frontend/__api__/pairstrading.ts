@@ -1,8 +1,3 @@
-/**
- * Pairs Trading API Service
- * Handles all API calls related to pairs trading, cointegration analysis, and trading signals
- * Provides functions to fetch recent signals, cointegration data, and pair details
- */
 import axios from 'axios';
 import { apiBaseUrl, defaultHeaders, requestTimeout } from './config';
 

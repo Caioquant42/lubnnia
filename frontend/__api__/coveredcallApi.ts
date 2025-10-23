@@ -1,8 +1,3 @@
-/**
- * Covered Call Strategy API Service
- * Fetches and manages covered call options data
- * Provides scoring and filtering for optimal covered call opportunities
- */
 import apiService from './apiService';
 
 /**

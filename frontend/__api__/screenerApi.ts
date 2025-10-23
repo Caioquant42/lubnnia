@@ -1,8 +1,3 @@
-/**
- * Screener API Service
- * Provides stock screening functionality based on RSI indicators
- * across multiple timeframes (15m, 60m, 1d, 1wk)
- */
 import apiService from './apiService';
 
 export interface RSIDataItem {

@@ -1,8 +1,3 @@
-/**
- * Collar Strategy API Service
- * Handles API calls for options collar strategy analysis
- * Fetches available strikes, calculates collar combinations, and manages strategy data
- */
 import axios from 'axios';
 import { apiBaseUrl, defaultHeaders, requestTimeout } from './config';
 

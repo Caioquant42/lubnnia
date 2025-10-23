@@ -1,8 +1,3 @@
-/**
- * Volatility API Service
- * Fetches and manages stock volatility data including implied volatility,
- * EWMA calculations, and various volatility metrics
- */
 import axios from 'axios';
 import { apiBaseUrl } from './config';
 

@@ -1,8 +1,3 @@
-/**
- * Relative Rotation Graph (RRG) API Service
- * Fetches RRG data for visualizing relative strength and momentum
- * of stocks compared to benchmark (IBOV)
- */
 import { apiBaseUrl } from './config';
 
 export type RRGDataPoint = {

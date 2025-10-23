@@ -3,10 +3,10 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  images: { 
-    unoptimized: false 
+  images: {
+    unoptimized: false,
   },
-  
+
   // Add cache headers for better cache control
   async headers() {
     return [
@@ -60,7 +60,7 @@ const nextConfig = {
       },
     ];
   },
-  
+
   // Only use API rewrites in development to avoid CORS issues
   async rewrites() {
     // Only rewrite in development - in production, use relative URLs that go through Nginx
@@ -81,12 +81,12 @@ const nextConfig = {
 
 module.exports = nextConfig;
 // For development server configuration
-if (process.env.NODE_ENV === 'development') {
-  module.exports = {
-    ...nextConfig,
-    serverOptions: {
-      hostname: '0.0.0.0',
-      port: 3000,
-    },
-  };
-}
+// if (process.env.NODE_ENV === 'development') {
+//   module.exports = {
+//     ...nextConfig,
+//     serverOptions: {
+//       hostname: '0.0.0.0',
+//       port: 3000,
+//     },
+//   };
+// }

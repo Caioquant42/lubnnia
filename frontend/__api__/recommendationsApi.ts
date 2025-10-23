@@ -1,8 +1,3 @@
-/**
- * Recommendations API Service
- * Fetches analyst recommendations and price targets for Brazilian stocks
- * Provides aggregated data on buy/sell ratings and target prices
- */
 import apiService from './apiService';
 
 /**
