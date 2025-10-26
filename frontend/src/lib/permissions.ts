@@ -3,12 +3,15 @@
  * Manages tier-based access to different applications/features
  */
 
-import { supabase } from './supabase';
+// import { supabase } from './supabase-old';
+import { createClientBrowser } from './supabaseClient';
+
+const supabase = createClientBrowser();
 
 /**
  * Available application IDs for access control
  */
-export type ApplicationId = 
+export type ApplicationId =
   | 'screener'
   | 'options'
   | 'collar'
@@ -29,7 +32,7 @@ export enum UserTier {
   FREE = 'free',
   BASIC = 'basic',
   PREMIUM = 'premium',
-  ENTERPRISE = 'enterprise'
+  ENTERPRISE = 'enterprise',
 }
 
 /**
@@ -37,16 +40,13 @@ export enum UserTier {
  * Defines which applications are available for each tier level
  */
 const TIER_PERMISSIONS: Record<UserTier, ApplicationId[]> = {
-  [UserTier.FREE]: [
-    'market-data',
-    'dividend-calendar'
-  ],
+  [UserTier.FREE]: ['market-data', 'dividend-calendar'],
   [UserTier.BASIC]: [
     'market-data',
     'dividend-calendar',
     'screener',
     'recommendations',
-    'retirement'
+    'retirement',
   ],
   [UserTier.PREMIUM]: [
     'market-data',
@@ -58,7 +58,7 @@ const TIER_PERMISSIONS: Record<UserTier, ApplicationId[]> = {
     'collar',
     'coveredcall',
     'volatility',
-    'portfolio'
+    'portfolio',
   ],
   [UserTier.ENTERPRISE]: [
     'market-data',
@@ -72,26 +72,31 @@ const TIER_PERMISSIONS: Record<UserTier, ApplicationId[]> = {
     'volatility',
     'portfolio',
     'pairs-trading',
-    'rrg'
-  ]
+    'rrg',
+  ],
 };
 
 /**
  * Get the current user's tier from Supabase
- * 
+ *
  * @returns The user's tier level or FREE if not authenticated
  */
 async function getUserTier(): Promise<UserTier> {
   try {
-    const { data: { user } } = await supabase.auth.getUser();
-    
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
     if (!user) {
       return UserTier.FREE;
     }
 
     // Try to get tier from user metadata
     const tierFromMetadata = user.user_metadata?.tier as string;
-    if (tierFromMetadata && Object.values(UserTier).includes(tierFromMetadata as UserTier)) {
+    if (
+      tierFromMetadata &&
+      Object.values(UserTier).includes(tierFromMetadata as UserTier)
+    ) {
       return tierFromMetadata as UserTier;
     }
 
@@ -120,17 +125,19 @@ async function getUserTier(): Promise<UserTier> {
 
 /**
  * Check if the current user has access to a specific application
- * 
+ *
  * @param applicationId - The ID of the application to check access for
  * @returns True if the user has access, false otherwise
- * 
+ *
  * @example
  * const canAccessPairsTrading = await hasApplicationAccess('pairs-trading');
  * if (!canAccessPairsTrading) {
  *   router.push('/pricing');
  * }
  */
-export async function hasApplicationAccess(applicationId: ApplicationId): Promise<boolean> {
+export async function hasApplicationAccess(
+  applicationId: ApplicationId
+): Promise<boolean> {
   try {
     const userTier = await getUserTier();
     const allowedApps = TIER_PERMISSIONS[userTier] || [];
@@ -144,7 +151,7 @@ export async function hasApplicationAccess(applicationId: ApplicationId): Promis
 
 /**
  * Get all applications the current user has access to
- * 
+ *
  * @returns Array of application IDs the user can access
  */
 export async function getUserApplications(): Promise<ApplicationId[]> {
@@ -159,13 +166,15 @@ export async function getUserApplications(): Promise<ApplicationId[]> {
 
 /**
  * Check if user needs to upgrade to access an application
- * 
+ *
  * @param applicationId - The application to check
  * @returns The minimum tier required, or null if already has access
  */
-export async function getRequiredTierForApp(applicationId: ApplicationId): Promise<UserTier | null> {
+export async function getRequiredTierForApp(
+  applicationId: ApplicationId
+): Promise<UserTier | null> {
   const hasAccess = await hasApplicationAccess(applicationId);
-  
+
   if (hasAccess) {
     return null;
   }
@@ -179,4 +188,3 @@ export async function getRequiredTierForApp(applicationId: ApplicationId): Promi
 
   return UserTier.ENTERPRISE;
 }
-

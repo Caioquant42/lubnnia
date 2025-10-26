@@ -29,6 +29,10 @@ import {
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
 
+import { createClientBrowser } from '@/lib/supabaseClient';
+
+import logoModified from '../../../../public/logoFiles/web/svg/logo_modified.svg';
+
 type NavItem = {
   title: string;
   href: string;
@@ -39,6 +43,8 @@ type NavItem = {
     href: string;
   }[];
 };
+
+const supabase = createClientBrowser();
 
 const mainNavItems: NavItem[] = [
   {
@@ -201,7 +207,7 @@ export function Sidebar({ className }: SidebarProps) {
         <div className='sticky top-0 z-10 flex h-14 items-center border-b px-2 md:h-[60px]'>
           <Link href='/' className='flex items-center gap-2'>
             <Image
-              src='/Logofiles/For Web/svg/logo_modified.svg'
+              src={logoModified}
               alt='Zomma Quant Logo'
               width={40}
               height={40}

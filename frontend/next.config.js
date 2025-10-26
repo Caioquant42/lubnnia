@@ -6,6 +6,22 @@ const nextConfig = {
   images: {
     unoptimized: false,
   },
+  env: {
+    NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  },
+  webpack: (config) => {
+    config.ignoreWarnings = [
+      { module: /@supabase\/auth-js/ },
+      { module: /@supabase\/functions-js/ },
+    ];
+    config.module.exprContextCritical = false;
+    config.ignoreWarnings = [
+      /Critical dependency: the request of a dependency is an expression/,
+    ];
+    return config;
+    return config;
+  },
 
   // Add cache headers for better cache control
   async headers() {
@@ -80,6 +96,7 @@ const nextConfig = {
 };
 
 module.exports = nextConfig;
+
 // For development server configuration
 // if (process.env.NODE_ENV === 'development') {
 //   module.exports = {

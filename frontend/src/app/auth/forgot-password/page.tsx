@@ -5,18 +5,23 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
-import { supabase } from '@/lib/supabase';
+// import { supabase } from '@/lib/supabase-old';
+import { createClientBrowser } from '@/lib/supabaseClient';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
+import noBackground from '../../../../public/logoFiles/web/png/colorLogoWithoutBackground.png';
+
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+
+  const supabase = createClientBrowser();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -50,7 +55,7 @@ export default function ForgotPasswordPage() {
             <div className='flex flex-col items-center text-center'>
               <div className='flex items-center gap-3 mb-4'>
                 <Image
-                  src='/Logofiles/For Web/svg/White logo - no background.svg'
+                  src={noBackground}
                   alt='Zomma Quant Logo'
                   width={120}
                   height={120}
@@ -120,7 +125,7 @@ export default function ForgotPasswordPage() {
           <div className='flex flex-col items-center text-center'>
             <div className='flex items-center gap-3 mb-4'>
               <Image
-                src='/Logofiles/For Web/svg/White logo - no background.svg'
+                src={noBackground}
                 alt='Zomma Quant Logo'
                 width={120}
                 height={120}

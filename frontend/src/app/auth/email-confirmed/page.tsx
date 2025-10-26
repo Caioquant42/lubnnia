@@ -5,10 +5,13 @@ import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { supabase } from '@/lib/supabase';
+// import { supabase } from '@/lib/supabase-old';
+import { createClientBrowser } from '@/lib/supabaseClient';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
+import noBackground from '../../../../public/logoFiles/web/png/colorLogoWithoutBackground.png';
 
 export default function EmailConfirmedPage() {
   const router = useRouter();
@@ -16,6 +19,8 @@ export default function EmailConfirmedPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [resendingEmail, setResendingEmail] = useState(false);
+
+  const supabase = createClientBrowser();
 
   useEffect(() => {
     // Check for error parameters in the URL hash
@@ -65,7 +70,7 @@ export default function EmailConfirmedPage() {
         prompt('Digite seu e-mail para reenviar a confirmação:');
 
       if (!email) {
-        setError('E-mail e obrigatorio para reenviar a confirmação');
+        setError('E-mail e obrigatório para reenviar a confirmação');
         setResendingEmail(false);
         return;
       }
@@ -108,7 +113,7 @@ export default function EmailConfirmedPage() {
             <div className='flex flex-col items-center text-center'>
               <div className='flex items-center gap-3 mb-4'>
                 <Image
-                  src='/Logofiles/For Web/svg/White logo - no background.svg'
+                  src={noBackground}
                   alt='Zomma Quant Logo'
                   width={120}
                   height={120}

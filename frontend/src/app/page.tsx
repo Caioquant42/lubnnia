@@ -19,6 +19,7 @@ import { Button } from '@/components/ui/button';
 import { useAuth } from '@/hooks/useAuth';
 
 import noBackground from '../../public/logoFiles/web/png/colorLogoWithoutBackground.png';
+import logoModified from '../../public/logoFiles/web/svg/logo_modified.svg';
 
 export default function LandingPage() {
   const { isAuthenticated } = useAuth();
@@ -697,7 +698,7 @@ export default function LandingPage() {
             <div className='flex items-center gap-3'>
               <button onClick={handleLogoClick}>
                 <Image
-                  src='/Logofiles/For Web/svg/logo_modified.svg'
+                  src={logoModified}
                   alt='Zomma Quant Logo'
                   width={32}
                   height={32}
