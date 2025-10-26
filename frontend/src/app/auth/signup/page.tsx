@@ -6,12 +6,14 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-import { supabase } from '@/lib/supabase';
+import { createClientBrowser } from '@/lib/supabaseClient';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+
+import noBackground from '../../../../public/logoFiles/web/png/colorLogoWithoutBackground.png';
 
 export default function SignupPage() {
   const router = useRouter();
@@ -28,6 +30,8 @@ export default function SignupPage() {
     password: '',
     confirmPassword: '',
   });
+
+  const supabase = createClientBrowser();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -139,7 +143,7 @@ export default function SignupPage() {
             <div className='flex flex-col items-center text-center'>
               <div className='flex items-center gap-3 mb-4'>
                 <Image
-                  src='/Logofiles/For Web/svg/White logo - no background.svg'
+                  src={noBackground}
                   alt='Zomma Quant Logo'
                   width={120}
                   height={120}
@@ -215,7 +219,7 @@ export default function SignupPage() {
           <div className='flex flex-col items-center text-center'>
             <div className='flex items-center gap-3 mb-4'>
               <Image
-                src='/Logofiles/For Web/svg/White logo - no background.svg'
+                src={noBackground}
                 alt='Zomma Quant Logo'
                 width={120}
                 height={120}

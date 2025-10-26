@@ -32,6 +32,8 @@ import {
 
 import { useAuth } from '@/hooks/useAuth';
 
+import { createClientBrowser } from '@/lib/supabaseClient';
+
 export function Header() {
   const { theme, setTheme } = useTheme();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -44,6 +46,8 @@ export function Header() {
   const [loading, setLoading] = useState(false);
 
   const unreadNotifications = notifications.filter((n) => !n.read).length;
+
+  const supabase = createClientBrowser();
 
   // Fetch real-time notifications
   const fetchNotifications = async () => {

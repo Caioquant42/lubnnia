@@ -50,7 +50,8 @@
       },
       "style": {
         "noUselessElse": "off",
-        "useImportType": "off"
+        "useImportType": "off",
+        "noNonNullAssertion": "off"
       }
     }
   },

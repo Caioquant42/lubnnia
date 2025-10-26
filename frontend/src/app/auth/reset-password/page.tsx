@@ -6,12 +6,15 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { supabase } from '@/lib/supabase';
+// import { supabase } from '@/lib/supabase-old';
+import { createClientBrowser } from '@/lib/supabaseClient';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+
+import noBackground from '../../../../public/logoFiles/web/png/colorLogoWithoutBackground.png';
 
 export default function ResetPasswordPage() {
   const router = useRouter();
@@ -23,6 +26,8 @@ export default function ResetPasswordPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
+
+  const supabase = createClientBrowser();
 
   useEffect(() => {
     // Check if we have the necessary tokens in the URL
@@ -83,7 +88,7 @@ export default function ResetPasswordPage() {
             <div className='flex flex-col items-center text-center'>
               <div className='flex items-center gap-3 mb-4'>
                 <Image
-                  src='/Logofiles/For Web/svg/White logo - no background.svg'
+                  src={noBackground}
                   alt='Zomma Quant Logo'
                   width={120}
                   height={120}
@@ -135,7 +140,7 @@ export default function ResetPasswordPage() {
           <div className='flex flex-col items-center text-center'>
             <div className='flex items-center gap-3 mb-4'>
               <Image
-                src='/Logofiles/For Web/svg/White logo - no background.svg'
+                src={noBackground}
                 alt='Zomma Quant Logo'
                 width={120}
                 height={120}
