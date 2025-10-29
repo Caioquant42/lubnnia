@@ -8,7 +8,7 @@ import {
   getVariationSentiment,
   StockVariationData,
   transformDataForSunburst,
-} from '__api__/variationApi';
+} from '@/api/variationApi';
 
 import { SunburstChart } from '@/components/Charts/SunburstChart';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';

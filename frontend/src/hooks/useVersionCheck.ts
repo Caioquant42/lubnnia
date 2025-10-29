@@ -9,7 +9,7 @@ import {
   getCurrentVersion,
   setCurrentVersion,
   shouldUpdateCache,
-} from '../../__api__/versionService';
+} from '../api/versionService';
 
 export const useVersionCheck = (checkInterval: number = 5 * 60 * 1000) => {
   // Default: 5 minutes

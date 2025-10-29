@@ -19,7 +19,7 @@ import { useEffect, useState } from 'react';
 import recommendationsApi, {
   AnalyzedRecommendation,
   RecommendationsResponse,
-} from '__api__/recommendationsApi';
+} from '@/api/recommendationsApi';
 
 import { cn } from '@/lib/utils';
 

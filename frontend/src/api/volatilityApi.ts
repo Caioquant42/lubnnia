@@ -61,7 +61,9 @@ export const fetchStocksVolatilityData = async (
   } = {}
 ): Promise<VolatilityApiResponse> => {
   try {
-    const response = await axios.get(`${apiBaseUrl}/api/ibov-stocks`, { params });
+    const response = await axios.get(`${apiBaseUrl}/api/ibov-stocks`, {
+      params,
+    });
     return response.data;
   } catch (error) {
     console.error('Error fetching stocks volatility data:', error);
@@ -89,7 +91,7 @@ export const categorizeVolatility = (ratio: number): string => {
  */
 export const getVolatilityStatusColor = (ratio: number): string => {
   if (ratio < 0.8) return 'blue-500'; // Extremely Low
-  if (ratio < 0.9) return 'cyan-500';  // Very Low
+  if (ratio < 0.9) return 'cyan-500'; // Very Low
   if (ratio < 1.0) return 'green-500'; // Low
   if (ratio < 1.1) return 'yellow-500'; // Neutral
   if (ratio < 1.2) return 'orange-500'; // High
@@ -100,74 +102,85 @@ export const getVolatilityStatusColor = (ratio: number): string => {
 /**
  * Get market sentiment based on aggregated volatility data
  */
-export const getMarketSentiment = (stocks: StockVolatilityData[]): { 
+export const getMarketSentiment = (
+  stocks: StockVolatilityData[]
+): {
   sentiment: string;
   description: string;
   ratioAvg: number;
   distribution: Record<string, number>;
 } => {
   if (!stocks || stocks.length === 0) {
-    return { 
-      sentiment: 'Desconhecido', 
+    return {
+      sentiment: 'Desconhecido',
       description: 'Nenhum dado disponível',
       ratioAvg: 0,
-      distribution: {}
+      distribution: {},
     };
   }
 
   // Calculate average IV/EWMA ratio
-  const validStocks = stocks.filter(stock => 
-    stock.iv_ewma_ratio !== undefined && !isNaN(stock.iv_ewma_ratio)
+  const validStocks = stocks.filter(
+    (stock) => stock.iv_ewma_ratio !== undefined && !isNaN(stock.iv_ewma_ratio)
   );
-  
-  const ratioSum = validStocks.reduce((sum, stock) => sum + stock.iv_ewma_ratio, 0);
+
+  const ratioSum = validStocks.reduce(
+    (sum, stock) => sum + stock.iv_ewma_ratio,
+    0
+  );
   const ratioAvg = validStocks.length > 0 ? ratioSum / validStocks.length : 0;
-  
+
   // Calculate distribution of volatility categories
   const distribution: Record<string, number> = {
     'Extremamente Baixa': 0,
     'Muito Baixa': 0,
-    'Baixa': 0,
-    'Neutra': 0,
-    'Alta': 0,
+    Baixa: 0,
+    Neutra: 0,
+    Alta: 0,
     'Muito Alta': 0,
     'Extremamente Alta': 0,
   };
-  
-  validStocks.forEach(stock => {
+
+  validStocks.forEach((stock) => {
     const category = categorizeVolatility(stock.iv_ewma_ratio);
     distribution[category]++;
   });
-  
+
   // Determine overall market sentiment
   let sentiment = '';
   let description = '';
-  
+
   if (ratioAvg < 0.85) {
     sentiment = 'Complacente';
-    description = 'O mercado está subestimando significativamente a volatilidade, sugerindo possível complacência entre os investidores.';
+    description =
+      'O mercado está subestimando significativamente a volatilidade, sugerindo possível complacência entre os investidores.';
   } else if (ratioAvg < 0.95) {
     sentiment = 'Calmo';
-    description = 'O mercado está relativamente calmo com volatilidade precificada abaixo dos níveis históricos.';
+    description =
+      'O mercado está relativamente calmo com volatilidade precificada abaixo dos níveis históricos.';
   } else if (ratioAvg < 1.05) {
     sentiment = 'Neutro';
-    description = 'O mercado está precificando a volatilidade em linha com os níveis históricos.';
+    description =
+      'O mercado está precificando a volatilidade em linha com os níveis históricos.';
   } else if (ratioAvg < 1.15) {
     sentiment = 'Cauteloso';
-    description = 'O mercado mostra sinais de cautela com volatilidade precificada acima dos níveis históricos.';
+    description =
+      'O mercado mostra sinais de cautela com volatilidade precificada acima dos níveis históricos.';
   } else if (ratioAvg < 1.3) {
     sentiment = 'Temeroso';
-    description = 'O mercado está precificando volatilidade significativa, sugerindo medo entre os investidores.';
+    description =
+      'O mercado está precificando volatilidade significativa, sugerindo medo entre os investidores.';
   } else {
     sentiment = 'Pânico';
-    description = 'O mercado está em estado de pânico com precificação extrema de volatilidade.';
+    description =
+      'O mercado está em estado de pânico com precificação extrema de volatilidade.';
   }
-  
+
   return {
     sentiment,
     description,
     ratioAvg,
-    distribution
+    distribution,
   };
 };
 
@@ -177,7 +190,7 @@ export const getMarketSentiment = (stocks: StockVolatilityData[]): {
 export const analyzeStockVolatility = (stock: StockVolatilityData) => {
   const category = categorizeVolatility(stock.iv_ewma_ratio);
   const color = getVolatilityStatusColor(stock.iv_ewma_ratio);
-  
+
   // Analyze trend based on short_term_trend and middle_term_trend
   let trend = 'Neutral';
   if (stock.short_term_trend === 1 && stock.middle_term_trend === 1) {
@@ -193,34 +206,48 @@ export const analyzeStockVolatility = (stock: StockVolatilityData) => {
   } else if (stock.middle_term_trend === -1) {
     trend = 'Medium-term Downtrend';
   }
-  
+
   // Analyze volatility characteristics
   let volatilityCharacteristics = [];
-  
+
   if (stock.iv_ewma_ratio > 1.2) {
-    volatilityCharacteristics.push('Implied volatility is significantly higher than historical volatility');
-    volatilityCharacteristics.push('Market is anticipating increased future volatility');
+    volatilityCharacteristics.push(
+      'Implied volatility is significantly higher than historical volatility'
+    );
+    volatilityCharacteristics.push(
+      'Market is anticipating increased future volatility'
+    );
   } else if (stock.iv_ewma_ratio < 0.8) {
-    volatilityCharacteristics.push('Implied volatility is significantly lower than historical volatility');
-    volatilityCharacteristics.push('Market is expecting decreased future volatility');
+    volatilityCharacteristics.push(
+      'Implied volatility is significantly lower than historical volatility'
+    );
+    volatilityCharacteristics.push(
+      'Market is expecting decreased future volatility'
+    );
   }
-  
+
   if (stock.iv_1y_percentile > 80) {
-    volatilityCharacteristics.push('Current IV is in the top 20% of the 1-year range');
+    volatilityCharacteristics.push(
+      'Current IV is in the top 20% of the 1-year range'
+    );
   } else if (stock.iv_1y_percentile < 20) {
-    volatilityCharacteristics.push('Current IV is in the bottom 20% of the 1-year range');
+    volatilityCharacteristics.push(
+      'Current IV is in the bottom 20% of the 1-year range'
+    );
   }
-  
+
   if (stock.beta_ibov > 1.5) {
-    volatilityCharacteristics.push('Stock has very high beta relative to Ibovespa');
+    volatilityCharacteristics.push(
+      'Stock has very high beta relative to Ibovespa'
+    );
   } else if (stock.beta_ibov < 0.5) {
     volatilityCharacteristics.push('Stock has low beta relative to Ibovespa');
   }
-  
+
   return {
     category,
     color,
     trend,
-    volatilityCharacteristics
+    volatilityCharacteristics,
   };
 };

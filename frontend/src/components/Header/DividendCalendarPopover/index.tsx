@@ -7,7 +7,7 @@ import {
   DividendData,
   DividendResponse,
   fetchUpcomingDividends,
-} from '__api__/dividendApi';
+} from '@/api/dividendApi';
 
 import { cn } from '@/lib/utils';
 

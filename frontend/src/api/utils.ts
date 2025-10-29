@@ -2,7 +2,7 @@
  * API Utilities
  * Common utility functions for API operations
  */
-import { apiBaseUrl, errorMessages, handleApiError } from './config';
+import { apiBaseUrl, handleApiError } from './config';
 
 /**
  * Creates a full URL for an endpoint by combining the API base URL with the endpoint path
@@ -11,8 +11,10 @@ import { apiBaseUrl, errorMessages, handleApiError } from './config';
  */
 export function createApiUrl(endpoint: string): string {
   // Ensure endpoint starts with a slash
-  const normalizedEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
-  
+  const normalizedEndpoint = endpoint.startsWith('/')
+    ? endpoint
+    : `/${endpoint}`;
+
   // Construct the full URL
   return `${apiBaseUrl}${normalizedEndpoint}`;
 }
@@ -24,22 +26,25 @@ export function createApiUrl(endpoint: string): string {
  */
 export function buildQueryParams(params: Record<string, any>): string {
   // Filter out null/undefined values
-  const validParams = Object.entries(params).filter(([_, value]) => 
-    value !== null && value !== undefined && value !== '');
-  
+  const validParams = Object.entries(params).filter(
+    ([_, value]) => value !== null && value !== undefined && value !== ''
+  );
+
   if (validParams.length === 0) {
     return '';
   }
-  
+
   // Convert parameters to query string
-  const queryString = validParams.map(([key, value]) => {
-    // Handle arrays by joining with commas
-    if (Array.isArray(value)) {
-      return `${encodeURIComponent(key)}=${encodeURIComponent(value.join(','))}`;
-    }
-    return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
-  }).join('&');
-  
+  const queryString = validParams
+    .map(([key, value]) => {
+      // Handle arrays by joining with commas
+      if (Array.isArray(value)) {
+        return `${encodeURIComponent(key)}=${encodeURIComponent(value.join(','))}`;
+      }
+      return `${encodeURIComponent(key)}=${encodeURIComponent(value)}`;
+    })
+    .join('&');
+
   return `?${queryString}`;
 }
 
@@ -48,31 +53,31 @@ export function buildQueryParams(params: Record<string, any>): string {
  * @param error - The error object from an API request
  * @returns A standardized error object
  */
-export function formatApiError(error: any): { 
-  message: string; 
-  status?: number; 
-  details?: string; 
+export function formatApiError(error: any): {
+  message: string;
+  status?: number;
+  details?: string;
   isNetworkError?: boolean;
 } {
   // Get user-friendly error message
   const message = handleApiError(error);
-  
+
   // Build standardized error object
   const formattedError = {
     message,
     isNetworkError: !error.response,
   };
-  
+
   // Add status code if available
   if (error.response?.status) {
     Object.assign(formattedError, { status: error.response.status });
   }
-  
+
   // Add error details if available
   if (error.response?.data?.details) {
     Object.assign(formattedError, { details: error.response.data.details });
   }
-  
+
   return formattedError;
 }
 
@@ -88,7 +93,7 @@ export function normalizeApiPath(path: string): string {
   if (path.startsWith('/api/')) {
     return path.substring(4); // Remove the first 4 characters (/api)
   }
-  
+
   // Otherwise return the path as is
   return path;
 }
@@ -106,7 +111,10 @@ export function getRetryConfig(retries = 3) {
     },
     retryCondition: (error: any) => {
       // Only retry on network errors or 5xx server errors
-      return !error.response || (error.response.status >= 500 && error.response.status < 600);
-    }
+      return (
+        !error.response ||
+        (error.response.status >= 500 && error.response.status < 600)
+      );
+    },
   };
 }
