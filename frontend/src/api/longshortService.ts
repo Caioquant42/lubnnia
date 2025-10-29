@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { apiBaseUrl, defaultHeaders, requestTimeout } from './config';
+import { apiBaseUrl } from './config';
 
 // Types
 export interface TradingSignal {
@@ -21,9 +20,9 @@ export interface PairData {
   spread: number[];
   zscore: number[];
   signals: {
-    buy_signals: { dates: string[], indices: number[], zscores: number[] };
-    sell_signals: { dates: string[], indices: number[], zscores: number[] };
-    close_signals: { dates: string[], indices: number[], zscores: number[] };
+    buy_signals: { dates: string[]; indices: number[]; zscores: number[] };
+    sell_signals: { dates: string[]; indices: number[]; zscores: number[] };
+    close_signals: { dates: string[]; indices: number[]; zscores: number[] };
   };
 }
 
@@ -39,7 +38,7 @@ export interface SignalsSummary {
 export interface RecentSignalsResponse {
   last_5_days_signals: TradingSignal[];
   pairs_data: {
-    [key: string]: PairData
+    [key: string]: PairData;
   };
   summary: SignalsSummary;
 }
@@ -58,14 +57,19 @@ const defaultOptions = {
  * Fetch recent trading signals from the API
  */
 export async function fetchRecentTradingSignals(): Promise<RecentSignalsResponse> {
-  const response = await fetch(`${apiBaseUrl}/api/pairs-trading/recent-signals`, {
-    ...defaultOptions,
-    method: 'GET',
-  });
-  
+  const response = await fetch(
+    `${apiBaseUrl}/api/pairs-trading/recent-signals`,
+    {
+      ...defaultOptions,
+      method: 'GET',
+    }
+  );
+
   if (!response.ok) {
-    throw new Error(`Failed to fetch recent trading signals: ${response.statusText}`);
+    throw new Error(
+      `Failed to fetch recent trading signals: ${response.statusText}`
+    );
   }
-  
+
   return response.json();
 }

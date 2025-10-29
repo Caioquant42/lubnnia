@@ -15,7 +15,7 @@ import {
   DividendData,
   DividendFilters,
   fetchDividendCalendar,
-} from '__api__/dividendApi';
+} from '@/api/dividendApi';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';

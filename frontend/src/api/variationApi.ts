@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { apiBaseUrl } from './config';
-import { getSectorShortName, getSectorIcon } from '@/utils/sectorMapping';
 
 export type StockVariationData = {
   symbol: string;
@@ -39,7 +38,9 @@ export const fetchStocksVariationData = async (
   } = {}
 ): Promise<VariationApiResponse> => {
   try {
-    const response = await axios.get(`${apiBaseUrl}/api/ibov-stocks`, { params });
+    const response = await axios.get(`${apiBaseUrl}/api/ibov-stocks`, {
+      params,
+    });
     return response.data;
   } catch (error) {
     console.error('Error fetching stocks variation data:', error);
@@ -69,7 +70,7 @@ export const getVariationColor = (variation: number): string => {
   // Normalize variation to a scale for color interpolation
   const normalizedVariation = Math.max(-5, Math.min(5, variation)); // Clamp between -5 and 5
   const intensity = Math.abs(normalizedVariation) / 5; // 0 to 1
-  
+
   if (variation >= 0) {
     // Green shades for positive variations
     const green = Math.floor(50 + intensity * 150); // 50 to 200
@@ -94,8 +95,8 @@ export const getVariationMagnitude = (variation: number): number => {
 export const transformDataForSunburst = (stocks: StockVariationData[]) => {
   // Group stocks by sector (if available) or create a single group
   const groupedData: { [key: string]: StockVariationData[] } = {};
-  
-  stocks.forEach(stock => {
+
+  stocks.forEach((stock) => {
     const sector = stock.sector || 'Uncategorized';
     if (!groupedData[sector]) {
       groupedData[sector] = [];
@@ -108,16 +109,16 @@ export const transformDataForSunburst = (stocks: StockVariationData[]) => {
     name: 'IBOV Stocks',
     children: Object.entries(groupedData).map(([sector, sectorStocks]) => ({
       name: sector, // Keep original sector name for mapping
-      children: sectorStocks.map(stock => ({
+      children: sectorStocks.map((stock) => ({
         name: stock.symbol,
         value: getVariationMagnitude(stock.variation),
         variation: stock.variation,
         color: getVariationColor(stock.variation),
         fullName: stock.name,
         close: stock.close,
-        sector: sector
-      }))
-    }))
+        sector: sector,
+      })),
+    })),
   };
 
   return sunburstData;
@@ -134,19 +135,24 @@ export const getVariationSentiment = (stocks: StockVariationData[]) => {
       positiveCount: 0,
       negativeCount: 0,
       neutralCount: 0,
-      description: 'No data available'
+      description: 'No data available',
     };
   }
 
-  const validStocks = stocks.filter(stock => 
-    stock.variation !== undefined && 
-    !isNaN(stock.variation)
+  const validStocks = stocks.filter(
+    (stock) => stock.variation !== undefined && !isNaN(stock.variation)
   );
 
-  const avgVariation = validStocks.reduce((sum, stock) => sum + stock.variation, 0) / validStocks.length;
-  
-  const positiveCount = validStocks.filter(stock => stock.variation > 0.5).length;
-  const negativeCount = validStocks.filter(stock => stock.variation < -0.5).length;
+  const avgVariation =
+    validStocks.reduce((sum, stock) => sum + stock.variation, 0) /
+    validStocks.length;
+
+  const positiveCount = validStocks.filter(
+    (stock) => stock.variation > 0.5
+  ).length;
+  const negativeCount = validStocks.filter(
+    (stock) => stock.variation < -0.5
+  ).length;
   const neutralCount = validStocks.length - positiveCount - negativeCount;
 
   let sentiment = 'Neutral';
@@ -172,6 +178,6 @@ export const getVariationSentiment = (stocks: StockVariationData[]) => {
     positiveCount,
     negativeCount,
     neutralCount,
-    description
+    description,
   };
 };
