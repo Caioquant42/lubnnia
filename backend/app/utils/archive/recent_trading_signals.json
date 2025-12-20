@@ -1,0 +1,530 @@
+{
+    "last_5_days_signals": [
+        {
+            "asset1": "ALOS3",
+            "asset2": "TAEE11",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 0.8382773338920728,
+            "half_life": 1.3254749126096717,
+            "p_value": 0.04998429745991894,
+            "current_zscore": 3.128692186562546
+        },
+        {
+            "asset1": "ALPA4",
+            "asset2": "ASAI3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 0.1854674075357075,
+            "half_life": 0.9636421223289995,
+            "p_value": 0.0022801007161474015,
+            "current_zscore": 2.0885174435132883
+        },
+        {
+            "asset1": "ALPA4",
+            "asset2": "B3SA3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 0.14113625383660844,
+            "half_life": 1.0545509332219538,
+            "p_value": 0.010406488648280246,
+            "current_zscore": 2.079467520172391
+        },
+        {
+            "asset1": "ALPA4",
+            "asset2": "CRFB3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 0.33403772898239426,
+            "half_life": 1.2340056167447329,
+            "p_value": 0.0018602570075404343,
+            "current_zscore": 2.1992287345748998
+        },
+        {
+            "asset1": "ALPA4",
+            "asset2": "CPFE3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 0.09301696482101689,
+            "half_life": 1.5981734816630278,
+            "p_value": 0.01049762038056663,
+            "current_zscore": 2.8418735888585083
+        },
+        {
+            "asset1": "ALPA4",
+            "asset2": "CYRE3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": -0.03078592625080061,
+            "half_life": 1.3566279741125054,
+            "p_value": 0.007832193821357462,
+            "current_zscore": 2.136991201204873
+        },
+        {
+            "asset1": "ALPA4",
+            "asset2": "EQTL3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 0.07493181537867588,
+            "half_life": 0.7629819884517792,
+            "p_value": 0.005809714744680526,
+            "current_zscore": 2.1727507295210637
+        },
+        {
+            "asset1": "ALPA4",
+            "asset2": "HYPE3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 0.04718764406103115,
+            "half_life": 0.8858032386978223,
+            "p_value": 0.027777914085214628,
+            "current_zscore": 2.121919271892302
+        },
+        {
+            "asset1": "ALPA4",
+            "asset2": "KLBN11",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 0.3112570956963352,
+            "half_life": 1.4073901585783957,
+            "p_value": 2.298762122050829e-05,
+            "current_zscore": 2.342893799601904
+        },
+        {
+            "asset1": "ALPA4",
+            "asset2": "PETR3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": -0.031016579963322233,
+            "half_life": 1.0446403370712203,
+            "p_value": 0.02806229779777549,
+            "current_zscore": 2.1955022035201743
+        },
+        {
+            "asset1": "ALPA4",
+            "asset2": "PETR4",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": -0.02749423257935455,
+            "half_life": 1.1343959643315518,
+            "p_value": 0.02917193023622815,
+            "current_zscore": 2.246588813152719
+        },
+        {
+            "asset1": "ALPA4",
+            "asset2": "SBSP3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 0.016008310413296884,
+            "half_life": 1.1701524355184643,
+            "p_value": 0.0008031260706550987,
+            "current_zscore": 2.1114980088439483
+        },
+        {
+            "asset1": "ALPA4",
+            "asset2": "SUZB3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": -0.06068684212086425,
+            "half_life": 0.8936464820346783,
+            "p_value": 7.996536489688275e-07,
+            "current_zscore": 2.018952049151818
+        },
+        {
+            "asset1": "ALPA4",
+            "asset2": "WEGE3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 0.022356911068573408,
+            "half_life": 2.482544072898015,
+            "p_value": 0.00047030943758816945,
+            "current_zscore": 2.7788484914123663
+        },
+        {
+            "asset1": "AZZA3",
+            "asset2": "CRFB3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 13.751958753739485,
+            "half_life": 2.96546122034958,
+            "p_value": 0.0010113397790459209,
+            "current_zscore": 2.0662132749298303
+        },
+        {
+            "asset1": "AZZA3",
+            "asset2": "EQTL3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 1.892480201562638,
+            "half_life": 0.8015938332310086,
+            "p_value": 0.04691595838771767,
+            "current_zscore": 2.127533956363062
+        },
+        {
+            "asset1": "BBDC3",
+            "asset2": "TAEE11",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 0.4735019019931148,
+            "half_life": 1.2267787181546366,
+            "p_value": 0.044296140729530684,
+            "current_zscore": 2.0013535486392464
+        },
+        {
+            "asset1": "BBAS3",
+            "asset2": "SMTO3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 0.26293800315496607,
+            "half_life": 3.6317472399434716,
+            "p_value": 0.03557523890739112,
+            "current_zscore": 2.216478578908785
+        },
+        {
+            "asset1": "CXSE3",
+            "asset2": "CCRO3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-02",
+            "beta": 0.6077319260646268,
+            "half_life": 1.164222735179803,
+            "p_value": 0.03724017746242153,
+            "current_zscore": -2.795461731665767
+        },
+        {
+            "asset1": "CXSE3",
+            "asset2": "ENGI11",
+            "signal_type": "buy",
+            "signal_date": "2025-05-02",
+            "beta": 0.24791687095540763,
+            "half_life": 1.1982938806877939,
+            "p_value": 0.01817773376502933,
+            "current_zscore": -2.5511709030055267
+        },
+        {
+            "asset1": "CXSE3",
+            "asset2": "ENEV3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-02",
+            "beta": 0.8633606210674117,
+            "half_life": 1.5772698046901745,
+            "p_value": 0.026353322015455382,
+            "current_zscore": -2.367229520732069
+        },
+        {
+            "asset1": "CXSE3",
+            "asset2": "EQTL3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-02",
+            "beta": 0.3875140749729282,
+            "half_life": 2.2678313306000097,
+            "p_value": 0.009361967673242452,
+            "current_zscore": -2.1461150363233052
+        },
+        {
+            "asset1": "CXSE3",
+            "asset2": "RDOR3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-02",
+            "beta": 0.3917600863183847,
+            "half_life": 2.1091386212620917,
+            "p_value": 0.026117284469350664,
+            "current_zscore": -2.5561081925827493
+        },
+        {
+            "asset1": "CXSE3",
+            "asset2": "SBSP3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-02",
+            "beta": 0.1080379263634486,
+            "half_life": 0.7098519251826506,
+            "p_value": 0.007085046743846222,
+            "current_zscore": -2.3795850397410834
+        },
+        {
+            "asset1": "CXSE3",
+            "asset2": "TIMS3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-02",
+            "beta": 0.6457097463616654,
+            "half_life": 1.3041355477245107,
+            "p_value": 0.016051848628980077,
+            "current_zscore": -2.5521463378322577
+        },
+        {
+            "asset1": "CRFB3",
+            "asset2": "CPLE6",
+            "signal_type": "buy",
+            "signal_date": "2025-05-02",
+            "beta": 0.3620268261926563,
+            "half_life": 2.08988101796345,
+            "p_value": 0.010226604546044314,
+            "current_zscore": -2.0002614018000733
+        },
+        {
+            "asset1": "CCRO3",
+            "asset2": "HYPE3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 0.36803144072750793,
+            "half_life": 1.2627701699133522,
+            "p_value": 0.0042765547983277235,
+            "current_zscore": 2.2451216699876437
+        },
+        {
+            "asset1": "CSAN3",
+            "asset2": "HAPV3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 3.013303320005174,
+            "half_life": 1.6366955046286307,
+            "p_value": 0.020443282826110378,
+            "current_zscore": 2.2565593819652223
+        },
+        {
+            "asset1": "LREN3",
+            "asset2": "PCAR3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 1.654572482116412,
+            "half_life": null,
+            "p_value": 0.03042842958709924,
+            "current_zscore": 3.019333638629921
+        },
+        {
+            "asset1": "LREN3",
+            "asset2": "RAIL3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 0.6575464256306462,
+            "half_life": null,
+            "p_value": 0.045886597602148096,
+            "current_zscore": 2.0674972156716533
+        },
+        {
+            "asset1": "LREN3",
+            "asset2": "VAMO3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 1.637766490705215,
+            "half_life": null,
+            "p_value": 0.01063075481801412,
+            "current_zscore": 2.0403773603483826
+        },
+        {
+            "asset1": "PRIO3",
+            "asset2": "SUZB3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": -0.349526500603202,
+            "half_life": 0.4662970307167953,
+            "p_value": 0.023067650560054435,
+            "current_zscore": 2.128044128155615
+        },
+        {
+            "asset1": "PRIO3",
+            "asset2": "TIMS3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 0.3621256434495829,
+            "half_life": 0.5232408230424768,
+            "p_value": 0.023509491788589743,
+            "current_zscore": 2.094354285183928
+        },
+        {
+            "asset1": "PRIO3",
+            "asset2": "TOTS3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 0.1525326031141109,
+            "half_life": 0.5353822041610339,
+            "p_value": 0.03625903622248429,
+            "current_zscore": 2.183896927296621
+        },
+        {
+            "asset1": "PETZ3",
+            "asset2": "VIVA3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-02",
+            "beta": 0.2644699062348664,
+            "half_life": 1.2585907972520913,
+            "p_value": 0.005159864126075424,
+            "current_zscore": -2.214767579518825
+        },
+        {
+            "asset1": "PETZ3",
+            "asset2": "WEGE3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 0.08828116090236451,
+            "half_life": 6.258689028376623,
+            "p_value": 0.0012701723207577669,
+            "current_zscore": 2.0143505432287316
+        },
+        {
+            "asset1": "UGPA3",
+            "asset2": "WEGE3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 0.18499583574672956,
+            "half_life": 3.4951459907877287,
+            "p_value": 0.011679994314928731,
+            "current_zscore": 2.2614482083727827
+        },
+        {
+            "asset1": "ALPA4",
+            "asset2": "ASAI3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 0.1854674075357075,
+            "half_life": 0.9636421223289995,
+            "p_value": 0.011722590997299904,
+            "current_zscore": 2.0885174435132883
+        },
+        {
+            "asset1": "ALPA4",
+            "asset2": "CMIG4",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 0.21424345145140106,
+            "half_life": 0.9167473879343823,
+            "p_value": 0.01496626182103325,
+            "current_zscore": 2.8315315092164646
+        },
+        {
+            "asset1": "ALPA4",
+            "asset2": "SUZB3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": -0.06068684212086425,
+            "half_life": 0.8936464820346783,
+            "p_value": 0.00686762748217717,
+            "current_zscore": 2.018952049151818
+        },
+        {
+            "asset1": "ASAI3",
+            "asset2": "CMIG4",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 1.365910874930028,
+            "half_life": 0.6731380492542084,
+            "p_value": 0.026809903934879184,
+            "current_zscore": 2.917395908833398
+        },
+        {
+            "asset1": "AZUL4",
+            "asset2": "CXSE3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-02",
+            "beta": -0.7514090567644179,
+            "half_life": 10.000642610167901,
+            "p_value": 0.045153249650003696,
+            "current_zscore": -2.4710682493113323
+        },
+        {
+            "asset1": "AZUL4",
+            "asset2": "SMTO3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-02",
+            "beta": -0.5718492962475648,
+            "half_life": 2.88158635774229,
+            "p_value": 0.026706200570639865,
+            "current_zscore": -2.1576226790661623
+        },
+        {
+            "asset1": "BPAC11",
+            "asset2": "EQTL3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 1.1699990418207296,
+            "half_life": 1.5094900666794877,
+            "p_value": 0.03197410052345346,
+            "current_zscore": 2.342129804882162
+        },
+        {
+            "asset1": "CCRO3",
+            "asset2": "EQTL3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 0.5417393618918398,
+            "half_life": 0.8100471291436805,
+            "p_value": 0.02788594270008061,
+            "current_zscore": 2.504618583176718
+        },
+        {
+            "asset1": "CMIG4",
+            "asset2": "PETZ3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-02",
+            "beta": 1.0850403346938233,
+            "half_life": 0.9201375011759341,
+            "p_value": 0.021635701672824987,
+            "current_zscore": -2.3040888223260136
+        },
+        {
+            "asset1": "EMBR3",
+            "asset2": "SMTO3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 1.0983758341475176,
+            "half_life": 1.6318568293140463,
+            "p_value": 0.0371874783041857,
+            "current_zscore": 2.1440704507351587
+        },
+        {
+            "asset1": "EMBR3",
+            "asset2": "VAMO3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 2.862542326753719,
+            "half_life": 1.064740770010627,
+            "p_value": 0.04843378824337925,
+            "current_zscore": 2.150906306037012
+        },
+        {
+            "asset1": "EZTC3",
+            "asset2": "TIMS3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-02",
+            "beta": -0.6162450217167876,
+            "half_life": 1.3944777057127307,
+            "p_value": 0.04299085518592092,
+            "current_zscore": -2.173947391053272
+        },
+        {
+            "asset1": "ITSA4",
+            "asset2": "MULT3",
+            "signal_type": "buy",
+            "signal_date": "2025-05-02",
+            "beta": 0.4648435904784208,
+            "half_life": 1.0346407232891546,
+            "p_value": 0.00045720384956493505,
+            "current_zscore": -2.1279305368619386
+        },
+        {
+            "asset1": "PETZ3",
+            "asset2": "WEGE3",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 0.08828116090236451,
+            "half_life": 6.258689028376623,
+            "p_value": 0.014082242992698576,
+            "current_zscore": 2.0143505432287316
+        },
+        {
+            "asset1": "RDOR3",
+            "asset2": "TAEE11",
+            "signal_type": "sell",
+            "signal_date": "2025-05-02",
+            "beta": 1.3065987006026585,
+            "half_life": 2.6348234960451316,
+            "p_value": 0.04550582155434964,
+            "current_zscore": 2.7169305140097566
+        }
+    ],
+    "summary": {
+        "total_signals": 52,
+        "buy_signals": 14,
+        "sell_signals": 38,
+        "generated_at": "2025-05-05 13:03:37"
+    }
+}

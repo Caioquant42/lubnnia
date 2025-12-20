@@ -1,0 +1,62 @@
+export const STRIPE_PRODUCTS = {
+  FREE: {
+    name: 'Zomma Free',
+    description: 'Basic access to essential trading tools',
+    priceId: 'free',
+    mode: 'subscription' as const,
+    features: [
+      'Basic market data',
+      'Basic technical indicators',
+      'Limited portfolio tracking',
+      'Community access',
+    ],
+    price: 0,
+    currency: 'BRL',
+    applications: [
+      'market_overview',
+      'basic_charts'
+    ],
+  },
+  ZOMMA_PRO: {
+    name: 'Zomma Pro',
+    description: 'Full access to all premium features and priority support',
+    priceId: 'price_1RJftABcLZsh0tZTuFtDix8E',
+    mode: 'subscription' as const,
+    features: [
+      'Real-time market data',
+      'Advanced technical analysis',
+      'Portfolio tracking',
+      'Advanced trading strategies',
+      'Priority support',
+      'Custom alerts',
+      'API access',
+      'Historical data',
+      'Pairs trading signals',
+      'Volatility analysis',
+      'Options strategies',
+      'Retirement calculator',
+      'Flow analysis',
+    ],
+    price: 79.90,
+    currency: 'BRL',
+    applications: [
+      'market_overview',
+      'basic_charts',
+      'advanced_charts',
+      'portfolio_tracker',
+      'basic_alerts',
+      'advanced_alerts',
+      'custom_strategies',
+      'historical_data',
+      'api_access',
+      'priority_support',
+      'pairs_trading',
+      'volatility_analysis',
+      'options_strategies',
+      'retirement_calculator',
+      'flow_analysis',
+    ],
+  },
+} as const;
+
+export type StripePlan = keyof typeof STRIPE_PRODUCTS;

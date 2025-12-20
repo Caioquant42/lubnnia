@@ -1,0 +1,7 @@
+this is located at frontend/.env.local
+NEXT_PUBLIC_SUPABASE_URL=https://wyjcrfmakqakgdwmnuzi.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Ind5amNyZm1ha3Fha2dkd21udXppIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU3MTczNDIsImV4cCI6MjA2MTI5MzM0Mn0.364Yqs0cIanr5Xj6jOa-n6Jq8hkwtmMWdsSJgh8mQ38
+NEXT_PUBLIC_SUPABASE_ACCESS_TOKEN=sbp_ab90c29b747bcdbd75e8afcd3e6c2d693c035d6e
+NEXT_PUBLIC_BACKEND_URL=http://localhost:5000
+NEXT_PUBLIC_API_URL=http://localhost:5000
+API_URL=https://zommaquant.com.br/api
