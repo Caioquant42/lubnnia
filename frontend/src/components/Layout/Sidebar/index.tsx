@@ -100,6 +100,18 @@ const otherNavItems: NavItem[] = [
         href: '/options/collar',
       },
       {
+        title: 'Crypto Collar',
+        href: '/options/crypto-collar',
+      },
+      {
+        title: 'Tail Hedge',
+        href: '/options/tail-hedge',
+      },
+      {
+        title: 'Collar UI',
+        href: '/options/collar-ui',
+      },
+      {
         title: 'Financiamento Coberto',
         href: '/options/coveredcall',
       },
