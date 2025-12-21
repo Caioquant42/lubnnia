@@ -12,6 +12,9 @@ from ..utils import *
 from ..utils.all_BR_recommendations import analyze_ibovlist, analyze_buy, analyze_strongbuy
 from ..utils.cointegration_stocks import get_cointegration_data, get_pair_trading_signals, get_pair_details, get_recent_trading_signals
 from ..utils.collar import get_collar_analysis
+from ..utils.crypto_collar import get_crypto_collar_analysis
+from ..utils.tail_hedge import get_tail_hedge_analysis
+from ..utils.collar_ui_mbb import get_collar_ui_analysis
 from ..utils.ddm_fluxo import get_fluxo_ddm_data
 from ..utils.archive.dividend_calendar_utils import (
     get_dividend_calendar_data, 
@@ -1739,3 +1742,161 @@ class DividendCalendarResource(Resource):
                 'error': 'Failed to retrieve dividend calendar data',
                 'message': str(e)
             }), 500)
+            
+class CryptoCollarResource(Resource):
+    """
+    API endpoint for crypto collar strategies
+    """
+    def get(self):
+        try:
+            # Get query parameters
+            underlying = request.args.get('underlying', 'BTC')
+            exchange = request.args.get('exchange', 'bybit')
+            min_days = request.args.get('min_days', 0, type=int)
+            max_days = request.args.get('max_days', 90, type=int)
+            min_gain_to_risk = request.args.get('min_gain_to_risk', 0.0, type=float)
+            
+            current_app.logger.info(
+                f"Fetching crypto collar for {underlying} on {exchange}"
+            )
+            
+            # Get collar analysis
+            collar_data = get_crypto_collar_analysis(
+                underlying=underlying,
+                exchange=exchange,
+                min_days=min_days,
+                max_days=max_days,
+                min_gain_to_risk=min_gain_to_risk
+            )
+            
+            current_app.logger.info(
+                f"Crypto collar data retrieved: {collar_data['metadata']['total_count']} strategies"
+            )
+            
+            response = make_response(jsonify(collar_data))
+            response.headers['Cache-Control'] = 'public, max-age=300'  # Cache for 5 minutes
+            return response
+            
+        except Exception as e:
+            current_app.logger.error(f"Error in CryptoCollarResource: {str(e)}")
+            current_app.logger.error(traceback.format_exc())
+            return {'error': str(e)}, 500
+
+
+class CollarUIResource(Resource):
+    """
+    API endpoint for Collar Up & In analysis using Moving Block Bootstrap
+    """
+    def get(self):
+        try:
+            ticker = request.args.get('ticker', 'VALE3')
+            ttm = request.args.get('ttm', 63, type=int)
+            max_loss = request.args.get('max_loss', -0.05, type=float)
+            threshold_percentage = request.args.get('threshold_percentage', 0.1346, type=float)
+            limited_gain = request.args.get('limited_gain', 0.048, type=float)
+            s0_override = request.args.get('S0', type=float)
+            n_bootstrap = request.args.get('n_bootstrap', 1000, type=int)
+            iterations = request.args.get('iterations', 50000, type=int)
+
+            current_app.logger.info(
+                f"Collar UI request ticker={ticker}, ttm={ttm}, "
+                f"max_loss={max_loss}, threshold={threshold_percentage}, gain={limited_gain}, "
+                f"bootstrap={n_bootstrap}, iterations={iterations}"
+            )
+
+            if ttm <= 0:
+                return {'error': 'ttm must be positive'}, 400
+
+            collar_ui_data = get_collar_ui_analysis(
+                ticker=ticker,
+                ttm=ttm,
+                max_loss=max_loss,
+                threshold_percentage=threshold_percentage,
+                limited_gain=limited_gain,
+                s0_override=s0_override,
+                n_bootstrap=n_bootstrap,
+                iterations=iterations,
+            )
+
+            response = make_response(jsonify(collar_ui_data))
+            response.headers['Cache-Control'] = 'public, max-age=300'
+            return response
+
+        except Exception as e:
+            current_app.logger.error(f"Error in CollarUIResource: {str(e)}")
+            current_app.logger.error(traceback.format_exc())
+            return {'error': str(e)}, 500
+
+
+class TailHedgeResource(Resource):
+    """
+    API endpoint for tail hedge strategies
+    """
+    def get(self):
+        try:
+            # Get query parameters
+            underlying = request.args.get('underlying', 'BTC')
+            exchange = request.args.get('exchange', 'bybit')
+            portfolio_size = request.args.get('portfolio_size', type=float)
+            portfolio_type = request.args.get('portfolio_type', 'units')  # 'units' or 'usd'
+            portfolio_hedge_percentage = request.args.get('portfolio_hedge_percentage', 0.50, type=float)
+            financing_percentage = request.args.get('financing_percentage', 0.50, type=float)
+            put_delta_min = request.args.get('put_delta_min', -0.20, type=float)
+            put_delta_max = request.args.get('put_delta_max', -0.10, type=float)
+            call_delta = request.args.get('call_delta', 0.05, type=float)
+            put_min_days = request.args.get('put_min_days', 30, type=int)
+            put_max_days = request.args.get('put_max_days', 60, type=int)
+            call_min_days = request.args.get('call_min_days', 60, type=int)
+            call_max_days = request.args.get('call_max_days', 90, type=int)
+            min_maturity_diff = request.args.get('min_maturity_diff', 7, type=int)
+            
+            # Validate required parameters
+            if portfolio_size is None:
+                return {'error': 'portfolio_size is required'}, 400
+            
+            if portfolio_type not in ['units', 'usd']:
+                return {'error': 'portfolio_type must be "units" or "usd"'}, 400
+            
+            # Validate percentages
+            if portfolio_hedge_percentage not in [0.50, 0.75, 1.0]:
+                return {'error': 'portfolio_hedge_percentage must be 0.50, 0.75, or 1.0'}, 400
+            
+            if financing_percentage not in [0.50, 0.75, 1.0]:
+                return {'error': 'financing_percentage must be 0.50, 0.75, or 1.0'}, 400
+            
+            current_app.logger.info(
+                f"Fetching tail hedge for {underlying} on {exchange}, "
+                f"portfolio: {portfolio_size} {portfolio_type}, "
+                f"hedge: {portfolio_hedge_percentage*100}%, financing: {financing_percentage*100}%"
+            )
+            
+            # Get tail hedge analysis
+            tail_hedge_data = get_tail_hedge_analysis(
+                underlying=underlying,
+                exchange=exchange,
+                portfolio_size=portfolio_size,
+                portfolio_type=portfolio_type,
+                portfolio_hedge_percentage=portfolio_hedge_percentage,
+                financing_percentage=financing_percentage,
+                put_delta_min=put_delta_min,
+                put_delta_max=put_delta_max,
+                call_delta=call_delta,
+                put_min_days=put_min_days,
+                put_max_days=put_max_days,
+                call_min_days=call_min_days,
+                call_max_days=call_max_days,
+                min_maturity_diff=min_maturity_diff
+            )
+            
+            current_app.logger.info(
+                f"Tail hedge data retrieved: {tail_hedge_data['metadata']['total_count']} strategies"
+            )
+            
+            response = make_response(jsonify(tail_hedge_data))
+            response.headers['Cache-Control'] = 'public, max-age=300'  # Cache for 5 minutes
+            return response
+            
+        except Exception as e:
+            current_app.logger.error(f"Error in TailHedgeResource: {str(e)}")
+            current_app.logger.error(traceback.format_exc())
+            return {'error': str(e)}, 500
