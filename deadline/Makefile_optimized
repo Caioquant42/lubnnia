@@ -1,0 +1,71 @@
+# Optimized Makefile for Portfolio Optimization System
+
+# Variables
+CC = gcc
+CFLAGS = -shared -fPIC -O2
+LIBS = -lm
+PYTHON = python3
+LIB_NAME = functions.so
+OPTIMIZED_FILES = main_optimized.py get_data_optimized.py functions_optimized.c
+
+# Default target
+all: compile run
+
+# Compile C library
+compile: $(LIB_NAME)
+
+$(LIB_NAME): functions_optimized.c
+	@echo "🔨 Compiling C library..."
+	$(CC) $(CFLAGS) -o $@ $< $(LIBS)
+	@echo "✅ C library compiled successfully"
+
+# Run optimization
+run: compile
+	@echo "🚀 Running portfolio optimization..."
+	$(PYTHON) main_optimized.py
+
+# Run with specific portfolio size
+run-size-%: compile
+	@echo "🚀 Running with portfolio size $*..."
+	$(PYTHON) main_optimized.py $*
+
+# Test C library
+test: compile
+	@echo "🧪 Testing C library..."
+	$(CC) -o test_lib functions_optimized.c $(LIBS)
+	./test_lib
+	@rm -f test_lib
+
+# Install dependencies
+install-deps:
+	@echo "📦 Installing Python dependencies..."
+	pip install numpy pandas matplotlib seaborn scipy yfinance
+
+# Clean build artifacts
+clean:
+	@echo "🧹 Cleaning build artifacts..."
+	rm -f $(LIB_NAME) test_lib *.png *.csv
+	@echo "✅ Cleaned"
+
+# Show help
+help:
+	@echo "Portfolio Optimization System - Makefile"
+	@echo "======================================"
+	@echo ""
+	@echo "Available targets:"
+	@echo "  all              - Compile and run (default)"
+	@echo "  compile          - Compile C library only"
+	@echo "  run              - Run optimization (portfolio size 4)"
+	@echo "  run-size-N       - Run with portfolio size N"
+	@echo "  test             - Test C library"
+	@echo "  install-deps     - Install Python dependencies"
+	@echo "  clean            - Clean build artifacts"
+	@echo "  help             - Show this help"
+	@echo ""
+	@echo "Examples:"
+	@echo "  make run-size-5  - Run with 5 assets"
+	@echo "  make test        - Test C library"
+	@echo "  make clean       - Clean all files"
+
+# Phony targets
+.PHONY: all compile run run-size-% test install-deps clean help 
