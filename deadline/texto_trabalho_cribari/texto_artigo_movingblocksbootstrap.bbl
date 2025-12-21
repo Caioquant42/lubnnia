@@ -1,0 +1,19 @@
+\begin{thebibliography}{1}
+
+\bibitem{Kunsch1989}
+H.~R. Künsch.
+\newblock The jackknife and the bootstrap for general stationary observations.
+\newblock {\em The Annals of Statistics}, 17(3):1217--1241, 1989.
+
+\bibitem{Lahiri2003}
+S.~N. Lahiri.
+\newblock {\em Resampling Methods for Dependent Data}.
+\newblock Springer, New York, 2003.
+
+\bibitem{PolitisRomano1994}
+D.~N. Politis and J.~P. Romano.
+\newblock The stationary bootstrap.
+\newblock {\em Journal of the American Statistical Association},
+  89(428):1303--1313, 1994.
+
+\end{thebibliography}
