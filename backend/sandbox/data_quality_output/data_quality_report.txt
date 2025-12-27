@@ -1,0 +1,40 @@
+================================================================================
+DATA QUALITY INSPECTION REPORT - BOVA MONTHLY OPTIONS
+================================================================================
+Generated: 2025-12-24 17:23:41
+
+SUMMARY
+--------------------------------------------------------------------------------
+Total issue categories found: 22
+
+
+Underlying Asset OPTIONS:
+--------------------------------------------------------------------------------
+  - Unknown: 0 records
+  - Unknown: 0 records
+  - Unknown: 0 records
+  - Unknown: 0 records
+  - Unknown: 0 records
+  - Unknown: 0 records
+  - Unknown: 0 records
+  - Unknown: 0 records
+  - Unknown: 0 records
+  - Bid > Ask: 11 records
+
+CALL OPTIONS:
+--------------------------------------------------------------------------------
+  - Negative BS_Price: 482 records
+  - Bid > Ask: 32,864 records
+  - Negative Implied Volatility: 2,769 records
+  - Extreme Implied Volatility (>500%): 2,227 records
+  - Deep ITM calls with very low prices: 14,808 records
+  - Very wide bid-ask spreads (>50% of price): 410,044 records
+
+PUT OPTIONS:
+--------------------------------------------------------------------------------
+  - Negative BS_Price: 1,484,730 records
+  - Bid > Ask: 38,480 records
+  - Negative Implied Volatility: 1,378,625 records
+  - Extreme Implied Volatility (>500%): 29,081 records
+  - Deep ITM puts with very low prices: 471,087 records
+  - Very wide bid-ask spreads (>50% of price): 24,793 records

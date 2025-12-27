@@ -1,0 +1,63 @@
+================================================================================
+ELASTICITY ANALYSIS REPORT - BOVA OPTIONS
+================================================================================
+Generated: 2025-12-24 17:30:40
+Risk-free rate used: 0.1375
+Note: MarketPrice uses actual market prices (LastPremio or Bid/Ask midpoint)
+
+
+================================================================================
+CALL OPTIONS - BS_Price
+================================================================================
+
+Top 5 Delta Ranges by Mean Elasticity:
+--------------------------------------------------------------------------------
+  Delta 0.01-0.05       | Mean Elasticity:    89.60 | Count:        5
+  Delta 0.05-0.10       | Mean Elasticity:    83.43 | Count:        5
+  Delta 0.10-0.20       | Mean Elasticity:    66.44 | Count:        5
+  Delta 0.30-0.40       | Mean Elasticity:    56.14 | Count:        5
+  Delta 0.20-0.30       | Mean Elasticity:    50.44 | Count:        6
+
+Weekly vs Monthly Comparison:
+--------------------------------------------------------------------------------
+  Monthly    | Mean:    60.64 | Std:    43.02 | Count:       36
+
+Elasticity by Time to Expiration:
+--------------------------------------------------------------------------------
+  0-7 days        | Mean Elasticity:   126.90 | Count:        7
+  8-14 days       | Mean Elasticity:    71.45 | Count:        7
+  15-30 days      | Mean Elasticity:    48.13 | Count:        7
+  31-60 days      | Mean Elasticity:    35.56 | Count:        7
+  61-90 days      | Mean Elasticity:    28.00 | Count:        7
+  90+ days        | Mean Elasticity:    12.61 | Count:        1
+
+================================================================================
+CALL OPTIONS - MarketPrice
+================================================================================
+
+Top 5 Delta Ranges by Mean Elasticity:
+--------------------------------------------------------------------------------
+  Delta 0.10-0.20       | Mean Elasticity:    57.73 | Count:        5
+  Delta 0.05-0.10       | Mean Elasticity:    57.55 | Count:        5
+  Delta 0.30-0.40       | Mean Elasticity:    51.29 | Count:        5
+  Delta 0.20-0.30       | Mean Elasticity:    47.35 | Count:        6
+  Delta 0.40-0.50       | Mean Elasticity:    43.65 | Count:        5
+
+Weekly vs Monthly Comparison:
+--------------------------------------------------------------------------------
+  Monthly    | Mean:    47.61 | Std:    21.60 | Count:       36
+
+Elasticity by Time to Expiration:
+--------------------------------------------------------------------------------
+  0-7 days        | Mean Elasticity:    76.94 | Count:        7
+  8-14 days       | Mean Elasticity:    59.45 | Count:        7
+  15-30 days      | Mean Elasticity:    43.55 | Count:        7
+  31-60 days      | Mean Elasticity:    35.98 | Count:        7
+  61-90 days      | Mean Elasticity:    27.63 | Count:        7
+  90+ days        | Mean Elasticity:     9.26 | Count:        1
+
+================================================================================
+RECOMMENDATIONS
+================================================================================
+
+Based on the analysis, the optimal delta ranges for high elasticity are:
