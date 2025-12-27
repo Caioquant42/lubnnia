@@ -1,6 +1,7 @@
 # Dependencies
 
-old_frontend/
+docs/
+deadline/
 node_modules/
 frontend/node_modules/
 **/node_modules/
@@ -68,6 +69,11 @@ frontend/logs/
 # Database
 *.db
 *.sqlite3
+# BOVA databases (large files)
+BOVA.db
+BOVA_monthly.db
+**/BOVA.db
+**/BOVA_monthly.db
 
 # Celery
 celerybeat-schedule.db

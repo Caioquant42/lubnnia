@@ -1,0 +1,299 @@
+================================================================================
+Database: /home/caraujo/Zomma/lub-dev/backend/sandbox/BOVA.db
+================================================================================
+
+Found 2 table(s):
+--------------------------------------------------------------------------------
+
+📊 Table: sqlite_sequence
+--------------------------------------------------------------------------------
+  Row count: 0
+
+  Columns (2):
+  ----------------------------------------------------------------------------
+    • name                                          
+    • seq                                           
+
+
+📊 Table: options_data
+--------------------------------------------------------------------------------
+  Row count: 4,582,450
+
+  Columns (20):
+  ----------------------------------------------------------------------------
+    • id                             INTEGER        
+    • Ativo                          TEXT           
+    • Data                           TEXT           
+    • Tipo                           TEXT           
+    • K                              REAL           
+    • VE                             REAL           
+    • VI                             REAL           
+    • Vencimento                     TEXT           
+    • Dias4Vencimento                REAL           
+    • Bid                            REAL           
+    • Ask                            REAL           
+    • LastPremio                     REAL           
+    • Volume                         REAL           
+    • BS_Price                       REAL           
+    • Vol_imp                        REAL           
+    • Delta                          REAL           
+    • Gama                           REAL           
+    • Theta                          REAL           
+    • Vega                           REAL           
+    • Rho                            REAL           
+
+  Sample data (first 5 rows):
+  ----------------------------------------------------------------------------
+    id              | Ativo           | Data            | Tipo            | K               ... (15 more columns)
+  ----------------------------------------------------------------------------
+    588292          | BOVA11          | 2024.05.02 09:3 | AtivoSubjacente | None            ... (15 more values)
+    588295          | BOVA11          | 2024.05.02 10:0 | AtivoSubjacente | None            ... (15 more values)
+    588296          | BOVA11          | 2024.05.02 10:0 | AtivoSubjacente | None            ... (15 more values)
+    588297          | BOVA11          | 2024.05.02 10:0 | AtivoSubjacente | None            ... (15 more values)
+    588298          | BOVA11          | 2024.05.02 10:0 | AtivoSubjacente | None            ... (15 more values)
+
+  📋 Sample data grouped by categorical columns:
+  ----------------------------------------------------------------------------
+
+    🔹 Tipo (3 distinct values):
+    --------------------------------------------------------------------------
+
+      1. Tipo = 'AtivoSubjacente' (9,914 rows)
+         588292               | BOVA11               | 2024.05.02 09:30:01  | AtivoSubjacente      ... (16 more columns)
+         588295               | BOVA11               | 2024.05.02 10:06:02  | AtivoSubjacente      ... (16 more columns)
+         588296               | BOVA11               | 2024.05.02 10:06:03  | AtivoSubjacente      ... (16 more columns)
+
+      2. Tipo = 'CALL' (2,272,702 rows)
+         589435               | BOVAE100             | 2024.05.02 09:30:01  | CALL                 ... (16 more columns)
+         589436               | BOVAE100             | 2024.05.02 10:06:04  | CALL                 ... (16 more columns)
+         589437               | BOVAE100             | 2024.05.02 10:07:02  | CALL                 ... (16 more columns)
+
+      3. Tipo = 'PUT' (2,299,834 rows)
+         732310               | BOVAQ100             | 2024.05.02 09:30:01  | PUT                  ... (16 more columns)
+         732311               | BOVAQ100             | 2024.05.02 10:06:04  | PUT                  ... (16 more columns)
+         732312               | BOVAQ100             | 2024.05.02 10:07:02  | PUT                  ... (16 more columns)
+
+    🔹 Vencimento (16 distinct values):
+    --------------------------------------------------------------------------
+
+      1. Vencimento = '2020.06.15' (15,006 rows)
+         833656               | BOVAR68              | 2024.05.02 09:30:01  | PUT                  ... (16 more columns)
+         833657               | BOVAR68              | 2024.05.02 10:06:03  | PUT                  ... (16 more columns)
+         833658               | BOVAR68              | 2024.05.02 10:07:02  | PUT                  ... (16 more columns)
+
+      2. Vencimento = '2020.07.20' (12,183 rows)
+         867184               | BOVAS60              | 2024.05.02 09:30:01  | PUT                  ... (16 more columns)
+         867185               | BOVAS60              | 2024.05.02 10:06:02  | PUT                  ... (16 more columns)
+         867186               | BOVAS60              | 2024.05.02 10:07:02  | PUT                  ... (16 more columns)
+
+      3. Vencimento = '2024.05.03' (39,350 rows)
+         590197               | BOVAE102W1           | 2024.05.02 09:30:01  | CALL                 ... (16 more columns)
+         590198               | BOVAE102W1           | 2024.05.02 10:06:04  | CALL                 ... (16 more columns)
+         590199               | BOVAE102W1           | 2024.05.02 10:07:02  | CALL                 ... (16 more columns)
+
+      4. Vencimento = '2024.05.10' (132,966 rows)
+         590578               | BOVAE102W2           | 2024.05.02 09:30:01  | CALL                 ... (16 more columns)
+         590579               | BOVAE102W2           | 2024.05.02 10:06:04  | CALL                 ... (16 more columns)
+         590580               | BOVAE102W2           | 2024.05.02 10:07:02  | CALL                 ... (16 more columns)
+
+      5. Vencimento = '2024.05.17' (760,590 rows)
+         589435               | BOVAE100             | 2024.05.02 09:30:01  | CALL                 ... (16 more columns)
+         589436               | BOVAE100             | 2024.05.02 10:06:04  | CALL                 ... (16 more columns)
+         589437               | BOVAE100             | 2024.05.02 10:07:02  | CALL                 ... (16 more columns)
+
+      6. Vencimento = '2024.05.24' (241,166 rows)
+         590959               | BOVAE102W4           | 2024.05.02 09:30:01  | CALL                 ... (16 more columns)
+         590960               | BOVAE102W4           | 2024.05.02 10:06:04  | CALL                 ... (16 more columns)
+         590961               | BOVAE102W4           | 2024.05.02 10:07:02  | CALL                 ... (16 more columns)
+
+      7. Vencimento = '2024.05.31' (241,203 rows)
+         591340               | BOVAE102W5           | 2024.05.02 09:30:01  | CALL                 ... (16 more columns)
+         591341               | BOVAE102W5           | 2024.05.02 10:06:04  | CALL                 ... (16 more columns)
+         591342               | BOVAE102W5           | 2024.05.02 10:07:02  | CALL                 ... (16 more columns)
+
+      8. Vencimento = '2024.06.07' (405,162 rows)
+         656110               | BOVAF102W1           | 2024.05.02 09:30:01  | CALL                 ... (16 more columns)
+         656111               | BOVAF102W1           | 2024.05.02 10:06:03  | CALL                 ... (16 more columns)
+         656112               | BOVAF102W1           | 2024.05.02 10:07:02  | CALL                 ... (16 more columns)
+
+      9. Vencimento = '2024.06.14' (288,514 rows)
+         5862889              | BOVAF102W2           | 2024.05.06 09:45:01  | CALL                 ... (16 more columns)
+         5862890              | BOVAF102W2           | 2024.05.06 10:08:35  | CALL                 ... (16 more columns)
+         5862891              | BOVAF102W2           | 2024.05.06 10:09:08  | CALL                 ... (16 more columns)
+
+      10. Vencimento = '2024.06.21' (1,335,534 rows)
+         655348               | BOVAF100             | 2024.05.02 09:30:01  | CALL                 ... (16 more columns)
+         655349               | BOVAF100             | 2024.05.02 10:06:03  | CALL                 ... (16 more columns)
+         655350               | BOVAF100             | 2024.05.02 10:07:02  | CALL                 ... (16 more columns)
+
+      ... and 6 more distinct values
+
+================================================================================
+📈 OPTIONS DATA ANALYSIS
+================================================================================
+
+🔍 Tipo Analysis:
+--------------------------------------------------------------------------------
+  • PUT                               2,299,834 rows (50.19%)
+  • CALL                              2,272,702 rows (49.60%)
+  • AtivoSubjacente                       9,914 rows ( 0.22%)
+
+  Total distinct Tipo values: 3
+
+  📊 Sample data for each Tipo:
+  ----------------------------------------------------------------------------
+
+    🔸 Tipo: 'PUT' (2,299,834 rows)
+    --------------------------------------------------------------------------
+      Ativo           | Data            | Tipo            | K               | Vencimento      | Dias4Vencimento ... (2 more)
+    --------------------------------------------------------------------------
+      BOVAQ100        | 2024.05.02 09:3 | PUT             | 100.0           | 2024.05.17      | 15.0            ... (2 more)
+      BOVAQ100        | 2024.05.02 10:0 | PUT             | 100.0           | 2024.05.17      | 15.0            ... (2 more)
+      BOVAQ100        | 2024.05.02 10:0 | PUT             | 100.0           | 2024.05.17      | 15.0            ... (2 more)
+      BOVAQ100        | 2024.05.02 10:0 | PUT             | 100.0           | 2024.05.17      | 15.0            ... (2 more)
+      BOVAQ100        | 2024.05.02 10:0 | PUT             | 100.0           | 2024.05.17      | 15.0            ... (2 more)
+
+    🔸 Tipo: 'CALL' (2,272,702 rows)
+    --------------------------------------------------------------------------
+      Ativo           | Data            | Tipo            | K               | Vencimento      | Dias4Vencimento ... (2 more)
+    --------------------------------------------------------------------------
+      BOVAE100        | 2024.05.02 09:3 | CALL            | 100.0           | 2024.05.17      | 15.0            ... (2 more)
+      BOVAE100        | 2024.05.02 10:0 | CALL            | 100.0           | 2024.05.17      | 15.0            ... (2 more)
+      BOVAE100        | 2024.05.02 10:0 | CALL            | 100.0           | 2024.05.17      | 15.0            ... (2 more)
+      BOVAE100        | 2024.05.02 10:0 | CALL            | 100.0           | 2024.05.17      | 15.0            ... (2 more)
+      BOVAE100        | 2024.05.02 10:0 | CALL            | 100.0           | 2024.05.17      | 15.0            ... (2 more)
+
+    🔸 Tipo: 'AtivoSubjacente' (9,914 rows)
+    --------------------------------------------------------------------------
+      Ativo           | Data            | Tipo            | K               | Vencimento      | Dias4Vencimento ... (2 more)
+    --------------------------------------------------------------------------
+      BOVA11          | 2024.05.02 09:3 | AtivoSubjacente | None            | None            | None            ... (2 more)
+      BOVA11          | 2024.05.02 10:0 | AtivoSubjacente | None            | None            | None            ... (2 more)
+      BOVA11          | 2024.05.02 10:0 | AtivoSubjacente | None            | None            | None            ... (2 more)
+      BOVA11          | 2024.05.02 10:0 | AtivoSubjacente | None            | None            | None            ... (2 more)
+      BOVA11          | 2024.05.02 10:0 | AtivoSubjacente | None            | None            | None            ... (2 more)
+
+🔍 Ativo Analysis:
+--------------------------------------------------------------------------------
+  Top 20 Ativo values (showing first 20):
+  • BOVA11                                9,914 rows ( 6.50%)
+  • BOVAR995                              7,503 rows ( 4.92%)
+  • BOVAR990                              7,503 rows ( 4.92%)
+  • BOVAR99                               7,503 rows ( 4.92%)
+  • BOVAR980                              7,503 rows ( 4.92%)
+  • BOVAR970                              7,503 rows ( 4.92%)
+  • BOVAR965                              7,503 rows ( 4.92%)
+  • BOVAR960                              7,503 rows ( 4.92%)
+  • BOVAR96                               7,503 rows ( 4.92%)
+  • BOVAR955                              7,503 rows ( 4.92%)
+  • BOVAR950                              7,503 rows ( 4.92%)
+  • BOVAR940                              7,503 rows ( 4.92%)
+  • BOVAR930                              7,503 rows ( 4.92%)
+  • BOVAR920                              7,503 rows ( 4.92%)
+  • BOVAR910                              7,503 rows ( 4.92%)
+  • BOVAR900                              7,503 rows ( 4.92%)
+  • BOVAR890                              7,503 rows ( 4.92%)
+  • BOVAR89                               7,503 rows ( 4.92%)
+  • BOVAR880                              7,503 rows ( 4.92%)
+  • BOVAR870                              7,503 rows ( 4.92%)
+
+  📊 Sample data for top 5 Ativo values:
+  ----------------------------------------------------------------------------
+
+    🔸 Ativo: 'BOVA11' (9,914 rows)
+    --------------------------------------------------------------------------
+      Ativo           | Data            | Tipo            | K               | Vencimento      ... (1 more)
+    --------------------------------------------------------------------------
+      BOVA11          | 2024.05.02 09:3 | AtivoSubjacente | None            | None            ... (1 more)
+      BOVA11          | 2024.05.02 10:0 | AtivoSubjacente | None            | None            ... (1 more)
+      BOVA11          | 2024.05.02 10:0 | AtivoSubjacente | None            | None            ... (1 more)
+
+    🔸 Ativo: 'BOVAR995' (7,503 rows)
+    --------------------------------------------------------------------------
+      Ativo           | Data            | Tipo            | K               | Vencimento      ... (1 more)
+    --------------------------------------------------------------------------
+      BOVAR995        | 2024.05.02 09:3 | PUT             | 99.5            | 2024.06.21      ... (1 more)
+      BOVAR995        | 2024.05.02 10:0 | PUT             | 99.5            | 2024.06.21      ... (1 more)
+      BOVAR995        | 2024.05.02 10:0 | PUT             | 99.5            | 2024.06.21      ... (1 more)
+
+    🔸 Ativo: 'BOVAR990' (7,503 rows)
+    --------------------------------------------------------------------------
+      Ativo           | Data            | Tipo            | K               | Vencimento      ... (1 more)
+    --------------------------------------------------------------------------
+      BOVAR990        | 2024.05.02 09:3 | PUT             | 99.0            | 2024.06.21      ... (1 more)
+      BOVAR990        | 2024.05.02 10:0 | PUT             | 99.0            | 2024.06.21      ... (1 more)
+      BOVAR990        | 2024.05.02 10:0 | PUT             | 99.0            | 2024.06.21      ... (1 more)
+
+    🔸 Ativo: 'BOVAR99' (7,503 rows)
+    --------------------------------------------------------------------------
+      Ativo           | Data            | Tipo            | K               | Vencimento      ... (1 more)
+    --------------------------------------------------------------------------
+      BOVAR99         | 2024.05.02 09:3 | PUT             | 100.0           | 2024.06.21      ... (1 more)
+      BOVAR99         | 2024.05.02 10:0 | PUT             | 100.0           | 2024.06.21      ... (1 more)
+      BOVAR99         | 2024.05.02 10:0 | PUT             | 100.0           | 2024.06.21      ... (1 more)
+
+    🔸 Ativo: 'BOVAR980' (7,503 rows)
+    --------------------------------------------------------------------------
+      Ativo           | Data            | Tipo            | K               | Vencimento      ... (1 more)
+    --------------------------------------------------------------------------
+      BOVAR980        | 2024.05.02 09:3 | PUT             | 98.0            | 2024.06.21      ... (1 more)
+      BOVAR980        | 2024.05.02 10:0 | PUT             | 98.0            | 2024.06.21      ... (1 more)
+      BOVAR980        | 2024.05.02 10:0 | PUT             | 98.0            | 2024.06.21      ... (1 more)
+
+📅 Dias4Vencimento (Days to Expiration) Analysis:
+--------------------------------------------------------------------------------
+  Min days to expiration:           N/A
+  Max days to expiration:           364
+  Average days to expiration:      31.37
+  Distinct expiration days:           67
+  Total rows with data:        4,572,536
+
+  Distribution by day ranges:
+  ----------------------------------------------------------------------------
+    0-7 days (Weekly)              572,726 rows (12.53%)
+    8-14 days                      570,722 rows (12.48%)
+    15-30 days                   1,149,683 rows (25.14%)
+    31-60 days                   1,869,029 rows (40.88%)
+    61-90 days                     408,678 rows ( 8.94%)
+    91-180 days                          0 rows ( 0.00%)
+    181-365 days                     1,698 rows ( 0.04%)
+    366+ days                            0 rows ( 0.00%)
+
+  🔍 Weekly Options Detection:
+  ----------------------------------------------------------------------------
+    Average gap between expirations: 5.52 days
+    Min gap: 1.00 days
+    Max gap: 283.00 days
+    Gaps in 5-9 day range (weekly): 0/66 (0.0%)
+
+    First 20 distinct expiration days:
+       1.    0 days (gap: 1.0 days)
+       2.    1 days (gap: 1.0 days)
+       3.    2 days (gap: 1.0 days)
+       4.    3 days (gap: 1.0 days)
+       5.    4 days (gap: 2.0 days)
+       6.    6 days (gap: 1.0 days)
+       7.    7 days (gap: 1.0 days)
+       8.    8 days (gap: 1.0 days)
+       9.    9 days (gap: 1.0 days)
+      10.   10 days (gap: 1.0 days)
+      11.   11 days (gap: 2.0 days)
+      12.   13 days (gap: 1.0 days)
+      13.   14 days (gap: 1.0 days)
+      14.   15 days (gap: 1.0 days)
+      15.   16 days (gap: 1.0 days)
+      16.   17 days (gap: 1.0 days)
+      17.   18 days (gap: 3.0 days)
+      18.   21 days (gap: 1.0 days)
+      19.   22 days (gap: 1.0 days)
+      20.   23 days
+      ... and 47 more
+
+    ⚠️  POSSIBLE WEEKLY OPTIONS: Some weekly patterns detected
+
+================================================================================
+Summary:
+--------------------------------------------------------------------------------
+Total tables: 2
+Total rows across all tables: 4,582,450
+================================================================================

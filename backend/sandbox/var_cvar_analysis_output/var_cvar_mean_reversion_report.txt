@@ -1,0 +1,77 @@
+================================================================================
+Z-SCORE EXTREME STRATEGY ANALYSIS
+================================================================================
+Generated: 2025-12-24 19:45:15
+
+Focus: CALL Options with Delta 0.20 to 0.05
+Strategy: Entry at Z-Score = -2, Exit at Z-Score = +2 (20-day rolling window)
+================================================================================
+
+Total Option Series Analyzed: 34
+
+VaR/CVaR Statistics:
+--------------------------------------------------------------------------------
+VaR 95% - Mean: 1.73%, Median: 0.00%
+CVaR 95% - Mean: 2.81%, Median: 0.21%
+
+Z-Score Signal Statistics:
+--------------------------------------------------------------------------------
+Entry Signals (Z <= -2) - Total: 2643, Mean per Option: 77.7
+Exit Signals (Z >= +2) - Total: 2336, Mean per Option: 68.7
+
+================================================================================
+ANALYSIS BY DAYS TO EXPIRATION (Dias4Vencimento)
+================================================================================
+
+Performance by Days to Expiration:
+--------------------------------------------------------------------------------
+Bucket          Count    Avg Sharpe   Avg Return   Win Rate   Winners    Losers    
+--------------------------------------------------------------------------------
+0-7 days        2               5.59      75.87%    57.72% 2          0         
+22-30 days      6               4.08      19.18%    64.96% 4          2         
+31-45 days      6               4.62     178.79%    65.13% 6          0         
+46-60 days      10              0.76     -10.06%    44.10% 4          6         
+61+ days        3               6.42     -18.01%    55.56% 1          2         
+8-14 days       4              -0.37      13.09%    47.63% 1          3         
+
+Key Findings:
+--------------------------------------------------------------------------------
+✓ Highest Sharpe Ratio: 61+ days (Sharpe: 6.42, Return: -18.01%, Win Rate: 55.56%)
+⚠ Lowest Sharpe Ratio: 8-14 days (Sharpe: -0.37, Return: 13.09%, Win Rate: 47.63%)
+✓ Highest Average Return: 31-45 days (Return: 178.79%, Sharpe: 4.62)
+⚠ Lowest Average Return: 61+ days (Return: -18.01%, Sharpe: 6.42)
+
+⚠ LOSING STRATEGIES (Negative Average Returns):
+--------------------------------------------------------------------------------
+  61+ days: Return -18.01%, Sharpe 6.42, Win Rate 55.56%, Losers: 2/3
+  46-60 days: Return -10.06%, Sharpe 0.76, Win Rate 44.10%, Losers: 6/10
+
+✓ WINNING STRATEGIES (Positive Returns & Sharpe > 0):
+--------------------------------------------------------------------------------
+  0-7 days: Return 75.87%, Sharpe 5.59, Win Rate 57.72%, Winners: 2/2
+  31-45 days: Return 178.79%, Sharpe 4.62, Win Rate 65.13%, Winners: 6/6
+  22-30 days: Return 19.18%, Sharpe 4.08, Win Rate 64.96%, Winners: 4/6
+
+Strategy Backtest Results:
+--------------------------------------------------------------------------------
+Options with Trades: 33/34
+Average Win Rate: 54.87%
+Average Total Return: 35.84%
+Average Sharpe Ratio: 2.59
+
+Successful Strategies (Positive Return & Win Rate > 50%): 17/33
+
+Top 5 Performing Strategies:
+--------------------------------------------------------------------------------
+1. Win Rate: 68.09%, Total Return: 428.51%, Sharpe: 6.22, Trades: 47
+2. Win Rate: 61.54%, Total Return: 226.91%, Sharpe: 5.82, Trades: 39
+3. Win Rate: 75.76%, Total Return: 208.07%, Sharpe: 6.19, Trades: 33
+4. Win Rate: 63.16%, Total Return: 143.89%, Sharpe: 6.97, Trades: 19
+5. Win Rate: 52.94%, Total Return: 136.09%, Sharpe: 7.86, Trades: 17
+
+================================================================================
+CONCLUSION
+================================================================================
+✓ Strategy appears to be SUCCESSFUL on average
+  - Average Return: 35.84%
+  - Average Win Rate: 54.87%

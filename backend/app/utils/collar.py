@@ -1,33 +1,21 @@
 import sys
 import os
 import json
-import requests
 import time
 import cmath
 from typing import Dict, List, Optional, Any
-from dotenv import load_dotenv
 
-load_dotenv()
+# Import OPLAB client
+from backend.oplab import create_client
+
+# Initialize OPLAB client (will use OPLAB_ACCESS_TOKEN from environment)
+_oplab_client = create_client()
 
 # Define the underlying assets
 underlying = ["PETR4","VALE3", "BOVA11", "BBAS3", "BBDC4", "COGN3", "MGLU3", "ITUB4", "WEGE3", "EMBR3"]
 
 call_bid = 'bid'  # change to bid/close if needed
 put_ask = 'ask'  # change to ask/close if needed
-
-# Define API key and headers
-headers = {
-    'Access-Token': os.getenv('OPLAB_ACCESS_TOKEN')
-}
-
-# Define base URL for the new API endpoint
-option_base_url = 'https://api.oplab.com.br/v3/market/options'
-
-# Define base URL for the new API endpoint
-spot_base_url = 'https://api.oplab.com.br/v3/market/stocks'
-
-# Define base URL for the new API endpoint
-riskfree_base_url = 'https://api.oplab.com.br/v3/market/interest_rates/{id}'
 
 def fetch_interest_rate(rate_id: str) -> Optional[Dict]:
     """
@@ -37,16 +25,8 @@ def fetch_interest_rate(rate_id: str) -> Optional[Dict]:
     Returns:
         dict: Interest rate data or None if request fails
     """
-    url = riskfree_base_url.format(id=rate_id)
     try:
-        response = requests.get(url, headers=headers)
-        if response.status_code == 200:
-            return response.json()
-        elif response.status_code == 204:
-            print(f"No data available for {rate_id}")
-        elif response.status_code == 401:
-            print("Unauthorized access")
-        return None
+        return _oplab_client.market.interest_rates.get_rate(rate_id)
     except Exception as e:
         print(f"Error fetching {rate_id} data: {str(e)}")
         return None
@@ -55,13 +35,19 @@ def fetch_underlying_data(underlying_symbols, max_retries=3, delay=5):
     all_data = []
     
     for symbol in underlying_symbols:
-        url = f"{spot_base_url}/{symbol}"
-        
         for attempt in range(max_retries):
             try:
-                response = requests.get(url, headers=headers, timeout=30)
-                response.raise_for_status()
-                data = response.json()
+                data = _oplab_client.market.stocks.get_stock(symbol)
+                
+                if data is None:
+                    if attempt < max_retries - 1:
+                        print(f"Attempt {attempt + 1} failed for {symbol}: No data available")
+                        print(f"Retrying in {delay} seconds...")
+                        time.sleep(delay)
+                        continue
+                    else:
+                        print(f"Failed to retrieve data for {symbol} after {max_retries} attempts. Skipping...")
+                        break
                 
                 # Filter the data to include only the desired fields
                 filtered_data = {
@@ -86,7 +72,7 @@ def fetch_underlying_data(underlying_symbols, max_retries=3, delay=5):
                 
                 all_data.append(filtered_data)  # Append filtered data for each symbol
                 break  # Exit retry loop if successful
-            except (requests.exceptions.RequestException, requests.exceptions.Timeout) as e:
+            except Exception as e:
                 print(f"Attempt {attempt + 1} failed for {symbol}: {str(e)}")
                 if attempt < max_retries - 1:
                     print(f"Retrying in {delay} seconds...")
@@ -100,19 +86,26 @@ def fetch_option_data(underlying_symbols, max_retries=3, delay=5):
     all_data = []
     
     for symbol in underlying_symbols:
-        url = f"{option_base_url}/{symbol}"
-        
         for attempt in range(max_retries):
             try:
-                response = requests.get(url, headers=headers, timeout=30)
-                response.raise_for_status()
-                data = response.json()
+                data = _oplab_client.market.options.list_options(symbol)
+                
+                if data is None:
+                    if attempt < max_retries - 1:
+                        print(f"Attempt {attempt + 1} failed for {symbol}: No data available")
+                        print(f"Retrying in {delay} seconds...")
+                        time.sleep(delay)
+                        continue
+                    else:
+                        print(f"Failed to retrieve data for {symbol} after {max_retries} attempts. Skipping...")
+                        break
+                
                 # Add parent_symbol to each option in the data
                 for option in data:
                     option['parent_symbol'] = symbol
                 all_data.extend(data)  # Combine data from all symbols
                 break  # Exit retry loop if successful
-            except (requests.exceptions.RequestException, requests.exceptions.Timeout) as e:
+            except Exception as e:
                 print(f"Attempt {attempt + 1} failed for {symbol}: {str(e)}")
                 if attempt < max_retries - 1:
                     print(f"Retrying in {delay} seconds...")
