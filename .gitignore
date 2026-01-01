@@ -65,6 +65,9 @@ frontend/logs/
 # Large binary files
 *.node
 **/*.node
+*.zip
+backend/sandbox.zip
+backend/oplab.zip
 
 # Database
 *.db
