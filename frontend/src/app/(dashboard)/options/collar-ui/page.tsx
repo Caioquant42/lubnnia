@@ -5,237 +5,193 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/components/ui/use-toast";
-import { getCollarUIData, CollarUIResponse } from "__api__/collarUIApi";
-import { Loader2, TrendingUp, Shield, Target } from "lucide-react";
-import { Area, AreaChart, CartesianGrid, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-
-type ScenarioKey = "downside" | "normal_upside" | "knockout_scenario2" | "knockout_scenario1";
+import {
+  getCollarUIComparison,
+  CollarUIComparisonParams,
+  CollarUIComparisonResponse,
+  getCollarUISingle,
+  CollarUISingleParams,
+  CollarUISingleResponse,
+} from "__api__/collarUIApi";
+import { Loader2 } from "lucide-react";
+import { CollarUIComparisonParams as ComparisonParamsComponent } from "@/components/Finance/CollarUIComparisonParams";
+import { CollarUIComparisonTable } from "@/components/Finance/CollarUIComparisonTable";
+import { CollarUIComparisonCharts } from "@/components/Finance/CollarUIComparisonCharts";
+import { CollarUISingleParams as SingleParamsComponent } from "@/components/Finance/CollarUISingleParams";
+import { CollarUISingleTable } from "@/components/Finance/CollarUISingleTable";
+import { CollarUISingleCharts } from "@/components/Finance/CollarUISingleCharts";
 
 export default function CollarUIPage() {
   const { toast } = useToast();
-  const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<CollarUIResponse | null>(null);
+  const [comparisonData, setComparisonData] = useState<CollarUIComparisonResponse | null>(null);
+  const [comparisonLoading, setComparisonLoading] = useState(false);
+  const [singleData, setSingleData] = useState<CollarUISingleResponse | null>(null);
+  const [singleLoading, setSingleLoading] = useState(false);
 
-  const [ticker, setTicker] = useState("VALE3");
-  const [S0, setS0] = useState<string>("");
-  const [ttm, setTtm] = useState("93");
-  const [maxLoss, setMaxLoss] = useState("-0.05");
-  const [thresholdPct, setThresholdPct] = useState("0.1346");
-  const [limitedGain, setLimitedGain] = useState("0.048");
-  const [nBootstrap, setNBootstrap] = useState("1000");
-  const [iterations, setIterations] = useState("50000");
+  // Comparison parameters
+  const [comparisonParams, setComparisonParams] = useState<CollarUIComparisonParams>({
+    ticker_A: "PETR4",
+    S0_A: 38.50,
+    strike_put_pct_A: 90.0,
+    strike_call_pct_A: 107.5,
+    expiration_date_A: "",
+    barrier_pct_A: 144.0,
+    ticker_B: "VALE3",
+    S0_B: 63.50,
+    strike_put_pct_B: 90.0,
+    strike_call_pct_B: 107.5,
+    expiration_date_B: "",
+    barrier_pct_B: 144.0,
+    n_bootstrap: 1000,
+  });
 
-  const handleCalculate = async () => {
+  // Single view parameters
+  const [singleParams, setSingleParams] = useState<CollarUISingleParams>({
+    ticker: "PETR4",
+    S0: 38.50,
+    strike_put_pct: 90.0,
+    strike_call_pct: 107.5,
+    expiration_date: "",
+    barrier_pct: 144.0,
+    n_bootstrap: 1000,
+  });
+
+  const handleComparisonCalculate = async () => {
     try {
-      setLoading(true);
-      const params = {
-        ticker,
-        ttm: parseInt(ttm),
-        max_loss: parseFloat(maxLoss),
-        threshold_percentage: parseFloat(thresholdPct),
-        limited_gain: parseFloat(limitedGain),
-        n_bootstrap: parseInt(nBootstrap),
-        iterations: parseInt(iterations),
-      } as any;
-      if (S0) params.S0 = parseFloat(S0);
-
-      const res = await getCollarUIData(params);
-      setData(res);
+      setComparisonLoading(true);
+      const res = await getCollarUIComparison(comparisonParams);
+      setComparisonData(res);
     } catch (error: any) {
       toast({
         title: "Erro",
-        description: error?.response?.data?.error || "Falha ao calcular Collar UI",
+        description: error?.response?.data?.error || "Falha ao calcular comparação",
         variant: "destructive",
       });
       console.error(error);
     } finally {
-      setLoading(false);
+      setComparisonLoading(false);
     }
   };
 
-  const payoffChartData =
-    data?.payoff_distribution.slice(0, 5000).map((p, idx) => ({
-      idx,
-      payoff: p,
-    })) || [];
-
-  const scenarioColors: Record<ScenarioKey, string> = {
-    downside: "#EF4444",
-    normal_upside: "#22C55E",
-    knockout_scenario2: "#F97316",
-    knockout_scenario1: "#6366F1",
+  const handleSingleCalculate = async () => {
+    try {
+      setSingleLoading(true);
+      const res = await getCollarUISingle(singleParams);
+      setSingleData(res);
+    } catch (error: any) {
+      toast({
+        title: "Erro",
+        description: error?.response?.data?.error || "Falha ao calcular estrutura",
+        variant: "destructive",
+      });
+      console.error(error);
+    } finally {
+      setSingleLoading(false);
+    }
   };
-
-  const formatCurrency = (v: number) =>
-    v?.toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 2 });
 
   return (
     <div className="container mx-auto py-6 space-y-6">
       <div className="mb-4">
         <h1 className="text-3xl font-bold tracking-tight">Collar Up & In (MBB)</h1>
         <p className="text-muted-foreground">
-          Análise da estratégia Collar Up & In utilizando Moving Block Bootstrap e Monte Carlo.
+          Analise estruturas Collar Up & In utilizando Moving Block Bootstrap e Monte Carlo.
         </p>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Parâmetros</CardTitle>
-          <CardDescription>Defina os parâmetros da estrutura</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="space-y-2">
-              <Label>Ativo</Label>
-              <Input value={ticker} onChange={(e) => setTicker(e.target.value)} />
-            </div>
-            <div className="space-y-2">
-              <Label>Preço de Referência (S0) opcional</Label>
-              <Input value={S0} onChange={(e) => setS0(e.target.value)} placeholder="ex: 63.5" />
-            </div>
-            <div className="space-y-2">
-              <Label>Dias úteis até vencimento (ttm)</Label>
-              <Input type="number" value={ttm} onChange={(e) => setTtm(e.target.value)} />
-            </div>
-          </div>
+      <Tabs defaultValue="single" className="w-full">
+        <TabsList>
+          <TabsTrigger value="single">Análise Individual</TabsTrigger>
+          <TabsTrigger value="comparison">Comparação</TabsTrigger>
+        </TabsList>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="space-y-2">
-              <Label>Perda máxima (ex: -0.05)</Label>
-              <Input value={maxLoss} onChange={(e) => setMaxLoss(e.target.value)} />
-            </div>
-            <div className="space-y-2">
-              <Label>Barreira knockout (% acima S0, ex: 0.1346)</Label>
-              <Input value={thresholdPct} onChange={(e) => setThresholdPct(e.target.value)} />
-            </div>
-            <div className="space-y-2">
-              <Label>Ganho limitado (ex: 0.048)</Label>
-              <Input value={limitedGain} onChange={(e) => setLimitedGain(e.target.value)} />
-            </div>
-          </div>
+        <TabsContent value="single" className="space-y-6">
+          <SingleParamsComponent
+            params={singleParams}
+            onChange={setSingleParams}
+          />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label>Bootstrap samples</Label>
-              <Input type="number" value={nBootstrap} onChange={(e) => setNBootstrap(e.target.value)} />
-            </div>
-            <div className="space-y-2">
-              <Label>Monte Carlo iterations</Label>
-              <Input type="number" value={iterations} onChange={(e) => setIterations(e.target.value)} />
-            </div>
-          </div>
-
-          <Button onClick={handleCalculate} disabled={loading}>
-            {loading ? (
+          <Button onClick={handleSingleCalculate} disabled={singleLoading} className="w-full">
+            {singleLoading ? (
               <>
                 <Loader2 className="h-4 w-4 mr-2 animate-spin" />
                 Calculando...
               </>
             ) : (
-              "Calcular"
+              "Calcular Estrutura"
             )}
           </Button>
-        </CardContent>
-      </Card>
 
-      {data && (
-        <>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="text-sm font-medium flex items-center gap-2">
-                  <TrendingUp className="h-4 w-4" /> Valor Esperado
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{formatCurrency(data.statistics.expected_value)}</div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="text-sm font-medium flex items-center gap-2">
-                  <Shield className="h-4 w-4" /> Perda Máxima
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{formatCurrency(data.metadata.perda_maxima)}</div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="text-sm font-medium flex items-center gap-2">
-                  <Target className="h-4 w-4" /> Barreira Knockout
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">{formatCurrency(data.metadata.barreira_knockout)}</div>
-              </CardContent>
-            </Card>
-            <Card>
-              <CardHeader className="pb-3">
-                <CardTitle className="text-sm font-medium">Amostras / Iterações</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold">
-                  {data.metadata.n_bootstrap} / {data.metadata.iterations}
-                </div>
-              </CardContent>
-            </Card>
+          {singleData && (
+            <>
+              <CollarUISingleTable data={singleData} />
+              <CollarUISingleCharts data={singleData} />
+            </>
+          )}
+        </TabsContent>
+
+        <TabsContent value="comparison" className="space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <ComparisonParamsComponent
+              params={comparisonParams}
+              onChange={(params) => {
+                setComparisonParams({ ...comparisonParams, ...params });
+              }}
+              structureLabel="A"
+            />
+            <ComparisonParamsComponent
+              params={comparisonParams}
+              onChange={(params) => {
+                setComparisonParams({ ...comparisonParams, ...params });
+              }}
+              structureLabel="B"
+            />
           </div>
 
           <Card>
             <CardHeader>
-              <CardTitle>Distribuição de Payoffs</CardTitle>
-              <CardDescription>Payoffs simulados (amostra)</CardDescription>
+              <CardTitle>Parâmetros Compartilhados</CardTitle>
             </CardHeader>
-            <CardContent className="h-[320px]">
-              {payoffChartData.length === 0 ? (
-                <div className="flex h-full items-center justify-center text-muted-foreground">
-                  Nenhum dado para exibir
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label>Número de Caminhos Bootstrap</Label>
+                  <Input
+                    type="number"
+                    value={comparisonParams.n_bootstrap || 1000}
+                    onChange={(e) =>
+                      setComparisonParams({
+                        ...comparisonParams,
+                        n_bootstrap: parseInt(e.target.value) || 1000,
+                      })
+                    }
+                  />
                 </div>
-              ) : (
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={payoffChartData}>
-                    <CartesianGrid strokeDasharray="3 3" opacity={0.2} />
-                    <XAxis dataKey="idx" hide />
-                    <YAxis />
-                    <Tooltip formatter={(v) => formatCurrency(Number(v))} />
-                    <ReferenceLine y={0} stroke="#666" strokeDasharray="3 3" />
-                    <Area dataKey="payoff" stroke="#2563EB" fill="#60A5FA" fillOpacity={0.4} />
-                  </AreaChart>
-                </ResponsiveContainer>
-              )}
+              </div>
             </CardContent>
           </Card>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Distribuição de Cenários</CardTitle>
-              <CardDescription>Contagem e porcentagem</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              {(["downside", "normal_upside", "knockout_scenario2", "knockout_scenario1"] as ScenarioKey[]).map(
-                (k) => (
-                  <div key={k} className="flex items-center justify-between rounded-md border p-2">
-                    <div className="flex items-center gap-2">
-                      <div className="h-3 w-3 rounded-full" style={{ backgroundColor: scenarioColors[k] }} />
-                      <span className="capitalize">
-                        {k.replace("_", " ")}
-                      </span>
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      {data.scenarios[k]} ({data.scenario_percentages[k].toFixed(2)}%)
-                    </div>
-                  </div>
-                )
-              )}
-            </CardContent>
-          </Card>
-        </>
-      )}
+          <Button onClick={handleComparisonCalculate} disabled={comparisonLoading} className="w-full">
+            {comparisonLoading ? (
+              <>
+                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                Calculando Comparação...
+              </>
+            ) : (
+              "Calcular Comparação"
+            )}
+          </Button>
+
+          {comparisonData && (
+            <>
+              <CollarUIComparisonTable data={comparisonData} />
+              <CollarUIComparisonCharts data={comparisonData} />
+            </>
+          )}
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }
-
-

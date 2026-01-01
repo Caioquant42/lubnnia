@@ -14,7 +14,8 @@ from ..utils.cointegration_stocks import get_cointegration_data, get_pair_tradin
 from ..utils.collar import get_collar_analysis
 from ..utils.crypto_collar import get_crypto_collar_analysis
 from ..utils.tail_hedge import get_tail_hedge_analysis
-from ..utils.collar_ui_mbb import get_collar_ui_analysis
+from ..utils.collar_ui_comparison import get_collar_ui_comparison
+from ..utils.collar_ui_single import get_collar_ui_single
 from ..utils.ddm_fluxo import get_fluxo_ddm_data
 from ..utils.archive.dividend_calendar_utils import (
     get_dividend_calendar_data, 
@@ -1783,47 +1784,150 @@ class CryptoCollarResource(Resource):
             return {'error': str(e)}, 500
 
 
-class CollarUIResource(Resource):
+class CollarUIComparisonResource(Resource):
     """
-    API endpoint for Collar Up & In analysis using Moving Block Bootstrap
+    API endpoint for comparing two Collar Up & In structures using Moving Block Bootstrap
     """
     def get(self):
         try:
-            ticker = request.args.get('ticker', 'VALE3')
-            ttm = request.args.get('ttm', 63, type=int)
-            max_loss = request.args.get('max_loss', -0.05, type=float)
-            threshold_percentage = request.args.get('threshold_percentage', 0.1346, type=float)
-            limited_gain = request.args.get('limited_gain', 0.048, type=float)
-            s0_override = request.args.get('S0', type=float)
+            # Structure A parameters
+            ticker_A = request.args.get('ticker_A')
+            S0_A = request.args.get('S0_A', type=float)
+            strike_put_pct_A = request.args.get('strike_put_pct_A', type=float)
+            strike_call_pct_A = request.args.get('strike_call_pct_A', type=float)
+            expiration_date_A = request.args.get('expiration_date_A')
+            barrier_pct_A = request.args.get('barrier_pct_A', type=float)
+            
+            # Structure B parameters
+            ticker_B = request.args.get('ticker_B')
+            S0_B = request.args.get('S0_B', type=float)
+            strike_put_pct_B = request.args.get('strike_put_pct_B', type=float)
+            strike_call_pct_B = request.args.get('strike_call_pct_B', type=float)
+            expiration_date_B = request.args.get('expiration_date_B')
+            barrier_pct_B = request.args.get('barrier_pct_B', type=float)
+            
+            # Shared parameters
             n_bootstrap = request.args.get('n_bootstrap', 1000, type=int)
-            iterations = request.args.get('iterations', 50000, type=int)
-
+            
+            # Validate required parameters
+            if not all([ticker_A, S0_A, strike_put_pct_A, strike_call_pct_A, expiration_date_A, barrier_pct_A]):
+                return {'error': 'Missing required parameters for Structure A'}, 400
+            
+            if not all([ticker_B, S0_B, strike_put_pct_B, strike_call_pct_B, expiration_date_B, barrier_pct_B]):
+                return {'error': 'Missing required parameters for Structure B'}, 400
+            
+            if S0_A <= 0 or S0_B <= 0:
+                return {'error': 'S0 must be positive'}, 400
+            
+            if strike_put_pct_A <= 0 or strike_put_pct_A >= 100:
+                return {'error': 'strike_put_pct_A must be between 0 and 100'}, 400
+            
+            if strike_put_pct_B <= 0 or strike_put_pct_B >= 100:
+                return {'error': 'strike_put_pct_B must be between 0 and 100'}, 400
+            
+            if strike_call_pct_A <= 0 or strike_call_pct_B <= 0:
+                return {'error': 'strike_call_pct must be positive'}, 400
+            
+            if barrier_pct_A <= 0 or barrier_pct_B <= 0:
+                return {'error': 'barrier_pct must be positive'}, 400
+            
+            if n_bootstrap <= 0:
+                return {'error': 'n_bootstrap must be positive'}, 400
+            
             current_app.logger.info(
-                f"Collar UI request ticker={ticker}, ttm={ttm}, "
-                f"max_loss={max_loss}, threshold={threshold_percentage}, gain={limited_gain}, "
-                f"bootstrap={n_bootstrap}, iterations={iterations}"
+                f"Collar UI Comparison request: "
+                f"A={ticker_A}, B={ticker_B}, n_bootstrap={n_bootstrap}"
             )
-
-            if ttm <= 0:
-                return {'error': 'ttm must be positive'}, 400
-
-            collar_ui_data = get_collar_ui_analysis(
-                ticker=ticker,
-                ttm=ttm,
-                max_loss=max_loss,
-                threshold_percentage=threshold_percentage,
-                limited_gain=limited_gain,
-                s0_override=s0_override,
+            
+            comparison_data = get_collar_ui_comparison(
+                ticker_A=ticker_A,
+                S0_A=S0_A,
+                strike_put_pct_A=strike_put_pct_A,
+                strike_call_pct_A=strike_call_pct_A,
+                expiration_date_A=expiration_date_A,
+                barrier_pct_A=barrier_pct_A,
+                ticker_B=ticker_B,
+                S0_B=S0_B,
+                strike_put_pct_B=strike_put_pct_B,
+                strike_call_pct_B=strike_call_pct_B,
+                expiration_date_B=expiration_date_B,
+                barrier_pct_B=barrier_pct_B,
                 n_bootstrap=n_bootstrap,
-                iterations=iterations,
             )
-
-            response = make_response(jsonify(collar_ui_data))
+            
+            response = make_response(jsonify(comparison_data))
             response.headers['Cache-Control'] = 'public, max-age=300'
             return response
-
+            
+        except ValueError as e:
+            current_app.logger.error(f"Validation error in CollarUIComparisonResource: {str(e)}")
+            return {'error': str(e)}, 400
         except Exception as e:
-            current_app.logger.error(f"Error in CollarUIResource: {str(e)}")
+            current_app.logger.error(f"Error in CollarUIComparisonResource: {str(e)}")
+            current_app.logger.error(traceback.format_exc())
+            return {'error': str(e)}, 500
+
+
+class CollarUISingleResource(Resource):
+    """
+    API endpoint for analyzing a single Collar Up & In structure using Moving Block Bootstrap
+    """
+    def get(self):
+        try:
+            # Structure parameters
+            ticker = request.args.get('ticker')
+            S0 = request.args.get('S0', type=float)
+            strike_put_pct = request.args.get('strike_put_pct', type=float)
+            strike_call_pct = request.args.get('strike_call_pct', type=float)
+            expiration_date = request.args.get('expiration_date')
+            barrier_pct = request.args.get('barrier_pct', type=float)
+            
+            # Shared parameters
+            n_bootstrap = request.args.get('n_bootstrap', 1000, type=int)
+            
+            # Validate required parameters
+            if not all([ticker, S0, strike_put_pct, strike_call_pct, expiration_date, barrier_pct]):
+                return {'error': 'Missing required parameters'}, 400
+            
+            if S0 <= 0:
+                return {'error': 'S0 must be positive'}, 400
+            
+            if strike_put_pct <= 0 or strike_put_pct >= 100:
+                return {'error': 'strike_put_pct must be between 0 and 100'}, 400
+            
+            if strike_call_pct <= 0:
+                return {'error': 'strike_call_pct must be positive'}, 400
+            
+            if barrier_pct <= 0:
+                return {'error': 'barrier_pct must be positive'}, 400
+            
+            if n_bootstrap <= 0:
+                return {'error': 'n_bootstrap must be positive'}, 400
+            
+            current_app.logger.info(
+                f"Collar UI Single request: "
+                f"ticker={ticker}, n_bootstrap={n_bootstrap}"
+            )
+            
+            structure_data = get_collar_ui_single(
+                ticker=ticker,
+                S0=S0,
+                strike_put_pct=strike_put_pct,
+                strike_call_pct=strike_call_pct,
+                expiration_date=expiration_date,
+                barrier_pct=barrier_pct,
+                n_bootstrap=n_bootstrap,
+            )
+            
+            response = make_response(jsonify(structure_data))
+            response.headers['Cache-Control'] = 'public, max-age=300'
+            return response
+            
+        except ValueError as e:
+            current_app.logger.error(f"Validation error in CollarUISingleResource: {str(e)}")
+            return {'error': str(e)}, 400
+        except Exception as e:
+            current_app.logger.error(f"Error in CollarUISingleResource: {str(e)}")
             current_app.logger.error(traceback.format_exc())
             return {'error': str(e)}, 500
 

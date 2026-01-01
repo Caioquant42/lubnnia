@@ -290,7 +290,8 @@ def generate_mbb_paths(
     n_caminhos: int,
 ) -> np.ndarray:
     """Gera caminhos de preço usando Moving Block Bootstrap (MBB)."""
-    returns = np.diff(prices) / prices[:-1]
+    # Retornos logarítmicos: log(P_t / P_{t-1}) = log(P_t) - log(P_{t-1})
+    returns = np.diff(np.log(prices))
     mbb_core = MBBCore()
 
     bootstrap_samples = mbb_core.moving_block_bootstrap(
@@ -299,7 +300,8 @@ def generate_mbb_paths(
         sample_size=dias_uteis,
     )
 
-    paths_sem_S0 = S0 * np.cumprod(1.0 + bootstrap_samples, axis=1)
+    # Constrói os caminhos de preço usando retornos logarítmicos: P_t = P_0 * exp(sum(log_returns))
+    paths_sem_S0 = S0 * np.exp(np.cumsum(bootstrap_samples, axis=1))
     paths = np.zeros((n_caminhos, dias_uteis + 1), dtype=float)
     paths[:, 0] = S0
     paths[:, 1:] = paths_sem_S0

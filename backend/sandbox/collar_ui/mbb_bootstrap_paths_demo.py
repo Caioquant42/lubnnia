@@ -108,22 +108,19 @@ def ask_user_inputs() -> Tuple[str, Dict, int]:
         print("Barreira de ativação inválida. Deve ser um número positivo.")
         sys.exit(1)
 
-    try:
-        ganho_max_ativado_pct = float(input("Ganho máximo se barreira ativada em % (ex: 7.5): ").strip())
-        ganho_max_ativado = ganho_max_ativado_pct / 100.0
-    except ValueError:
-        print("Ganho máximo (ativado) inválido.")
-        sys.exit(1)
-
-    try:
-        ganho_max_nao_ativado_pct = float(input("Ganho máximo se barreira NÃO ativada em % (ex: 43.99): ").strip())
-        ganho_max_nao_ativado = ganho_max_nao_ativado_pct / 100.0
-    except ValueError:
-        print("Ganho máximo (não ativado) inválido.")
-        sys.exit(1)
+    # Calcula automaticamente os ganhos máximos:
+    # 1. Ganho máximo se barreira ativada = diferença entre strike call e S0
+    ganho_max_ativado = strike_call - 1.0
+    
+    # 2. Ganho máximo se barreira NÃO ativada = diferença entre barreira e S0, menos 0.01% de margem
+    # para garantir que a barreira não foi atingida
+    ganho_max_nao_ativado = barreira_ativacao - 1.0 - 0.0001
+    
+    print(f"\n✓ Ganho máximo se barreira ativada: {ganho_max_ativado*100:.2f}% (calculado automaticamente)")
+    print(f"✓ Ganho máximo se barreira NÃO ativada: {ganho_max_nao_ativado*100:.2f}% (calculado automaticamente)")
 
     # Prejuízo máximo calculado a partir do strike put
-    prejuizo_maximo = 1.0 - strike_put  # Ex: se strike_put = 0.90, prejuizo_max = 0.10 (10%)
+    prejuizo_maximo = 1.0 - strike_put
 
     caminhos_str = input("Número de caminhos de bootstrap [padrão = 1000]: ").strip()
     if caminhos_str == "":
@@ -161,26 +158,45 @@ def get_price_series(ticker: str, dias_uteis: int) -> np.ndarray:
     """
     dg = DataGatherer(use_monte_carlo_selection=False)
 
-    # Usamos um período maior que o horizonte para ter dados suficientes
-    # Exemplo: 3x o número de dias úteis desejado (limitado a 252 dias ~ 1 ano)
-    periodo_dias = min(max(dias_uteis * 3, dias_uteis + 20), 252)
-    period_str = f"{periodo_dias}d"
-
-    df = dg.get_data(asset_list=[ticker], period=period_str)
+    # Calcula período necessário: pelo menos 3x o horizonte ou horizonte + 20 dias
+    # Para períodos muito longos, usa start_date/end_date em vez de period
+    periodo_dias = max(dias_uteis * 3, dias_uteis + 20)
+    
+    # Se o período for muito longo (> 2 anos), usa start_date/end_date
+    if periodo_dias > 500:
+        from datetime import timedelta
+        end_date = datetime.now()
+        start_date = end_date - timedelta(days=int(periodo_dias * 1.5))  # Buffer de 50% para garantir dias úteis
+        df = dg.get_data(
+            asset_list=[ticker], 
+            start_date=start_date.strftime("%Y-%m-%d"),
+            end_date=end_date.strftime("%Y-%m-%d")
+        )
+    else:
+        period_str = f"{periodo_dias}d"
+        df = dg.get_data(asset_list=[ticker], period=period_str)
+    
     if df.empty:
         print(f"Não foi possível baixar dados para o ativo {ticker}.")
         sys.exit(1)
 
-    # A série vem com o ticker já com sufixo .SA
     col_name = df.columns[0]
     prices = df[col_name].values.astype(float)
 
-    if len(prices) < dias_uteis + 5:
-        print(
-            f"Número de observações ({len(prices)}) é muito pequeno em relação ao horizonte "
-            f"de {dias_uteis} dias úteis. Considere usar menos dias."
-        )
-        sys.exit(1)
+    # Verifica se há dados suficientes, mas permite continuar com aviso se houver pelo menos alguns dados
+    if len(prices) < dias_uteis:
+        if len(prices) < 20:
+            print(
+                f"ERRO: Número de observações ({len(prices)}) é muito pequeno. "
+                f"Necessário pelo menos {dias_uteis} dias úteis."
+            )
+            sys.exit(1)
+        else:
+            print(
+                f"AVISO: Número de observações ({len(prices)}) é menor que o horizonte "
+                f"de {dias_uteis} dias úteis. A simulação continuará com os dados disponíveis, "
+                f"mas os resultados podem ser menos confiáveis."
+            )
 
     return prices
 
@@ -283,29 +299,29 @@ def generate_mbb_paths(
     Gera caminhos de preço usando Moving Block Bootstrap (MBB).
 
     Passos:
-      1. Calcula retornos diários (pct_change).
+      1. Calcula retornos logarítmicos (log returns).
       2. Aplica MBB (MBBCore.moving_block_bootstrap) para gerar n_caminhos amostras.
-      3. Constrói caminhos de preço aplicando cumulativamente os retornos sobre S0.
+      3. Constrói caminhos de preço aplicando cumulativamente os retornos logarítmicos sobre S0.
 
     Retorna:
         paths: array (n_caminhos, dias_uteis + 1) com preços simulados,
                incluindo o ponto inicial S0 na coluna 0.
     """
-    # Retornos simples (pct_change), como no OptionPricer do módulo MBB
-    returns = np.diff(prices) / prices[:-1]
+    # Retornos logarítmicos: log(P_t / P_{t-1}) = log(P_t) - log(P_{t-1})
+    returns = np.diff(np.log(prices))
 
     mbb_core = MBBCore()
 
-    # Gera amostras de retornos com blocos móveis
+    # Gera amostras de retornos logarítmicos com blocos móveis
     bootstrap_samples = mbb_core.moving_block_bootstrap(
         returns,
         n_bootstrap=n_caminhos,
         sample_size=dias_uteis,
     )
 
-    # Constrói os caminhos de preço: P_t = P_{t-1} * (1 + r_t)
+    # Constrói os caminhos de preço usando retornos logarítmicos: P_t = P_0 * exp(sum(log_returns))
     # paths_sem_S0 tem shape (n_caminhos, dias_uteis)
-    paths_sem_S0 = S0 * np.cumprod(1.0 + bootstrap_samples, axis=1)
+    paths_sem_S0 = S0 * np.exp(np.cumsum(bootstrap_samples, axis=1))
 
     # Inclui S0 na coluna inicial para ter o ponto t=0
     paths = np.zeros((n_caminhos, dias_uteis + 1), dtype=float)

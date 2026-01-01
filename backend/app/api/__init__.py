@@ -43,8 +43,8 @@ def index():
             'GET /api/crypto-collar?underlying=BTC&min_days=0&max_days=90',  # Filter by days to expiry range
             'GET /api/crypto-collar?underlying=BTC&min_gain_to_risk=0.5',  # Filter by minimum gain-to-risk ratio
             'GET /api/crypto-collar?underlying=ETH&min_days=15&max_days=30&min_gain_to_risk=1.0',  # Combined filters
-            '/api/collar-ui',  # Collar Up & In strategy with Moving Block Bootstrap
-            'GET /api/collar-ui?ticker=VALE3&ttm=93&max_loss=-0.05&threshold_percentage=0.1346&limited_gain=0.048&n_bootstrap=1000&iterations=50000',
+            '/api/collar-ui/compare',  # Compare two Collar Up & In structures
+            'GET /api/collar-ui/compare?ticker_A=PETR4&S0_A=38.50&strike_put_pct_A=90.0&strike_call_pct_A=107.5&expiration_date_A=12-03-2026&barrier_pct_A=144.0&ticker_B=VALE3&S0_B=63.50&strike_put_pct_B=90.0&strike_call_pct_B=107.5&expiration_date_B=12-03-2026&barrier_pct_B=144.0&n_bootstrap=1000',
             '/api/tail-hedge',  # Tail hedge strategy endpoint
             'GET /api/tail-hedge?underlying=BTC&portfolio_size=1000&portfolio_type=units&portfolio_hedge_percentage=0.50&financing_percentage=0.50',
             'GET /api/tail-hedge?underlying=BTC&portfolio_size=65000000&portfolio_type=usd&portfolio_hedge_percentage=0.75&financing_percentage=0.75',
@@ -112,7 +112,8 @@ api_paths = Config.API_PATHS if hasattr(Config, 'API_PATHS') else {}
 
 # Register resources using config paths
 api.add_resource(CryptoCollarResource, api_paths.get('crypto_collar', '/crypto-collar'))
-api.add_resource(CollarUIResource, api_paths.get('collar_ui', '/collar-ui'))
+api.add_resource(CollarUIComparisonResource, api_paths.get('collar_ui_compare', '/collar-ui/compare'))
+api.add_resource(CollarUISingleResource, api_paths.get('collar_ui_single', '/collar-ui/single'))
 api.add_resource(TailHedgeResource, api_paths.get('tail_hedge', '/tail-hedge'))
 api.add_resource(RRGDataResource, api_paths.get('rrg', '/rrg'))
 api.add_resource(BrRecommendationsResource, api_paths.get('br_recommendations', '/br-recommendations'))

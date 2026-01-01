@@ -4,9 +4,14 @@ import json
 import time
 import cmath
 from typing import Dict, List, Optional, Any
+from pathlib import Path
 
 # Import OPLAB client
-from backend.oplab import create_client
+# Add parent directory to path to allow importing oplab
+_backend_dir = Path(__file__).resolve().parent.parent.parent
+if str(_backend_dir) not in sys.path:
+    sys.path.insert(0, str(_backend_dir))
+from oplab import create_client
 
 # Initialize OPLAB client (will use OPLAB_ACCESS_TOKEN from environment)
 _oplab_client = create_client()
